@@ -4,13 +4,7 @@ using Infrastructure.Data.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Helpers
 {
@@ -39,8 +33,8 @@ namespace Infrastructure.Helpers
             return provider;
         }
 
-        private static async Task SeedAdmin(UserManager<User> userManager, 
-            RoleManager<IdentityRole<Guid>> roleManager, 
+        private static async Task SeedAdmin(UserManager<User> userManager,
+            RoleManager<IdentityRole<Guid>> roleManager,
             AppIdentityDbContext dbContext)
         {
             var admin = dbContext.Users.FirstOrDefault(x => x.Email == "app.admin@gmail.com");

@@ -5,18 +5,13 @@ using Domain;
 using Infrastructure.Data.Domain;
 using Infrastructure.Services.Interfaces;
 using LanguageExt.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
     internal class SignInService : ISignInService
     {
         private const string FailedToSignIn = "Failed to sign in";
-        private const string FailedToCreateUser = "Failed to register";  
+        private const string FailedToCreateUser = "Failed to register";
 
         private readonly IIdenityAuthService _idenityAuthService;
         private readonly DomainDbContext _domainDb;
@@ -44,7 +39,7 @@ namespace Infrastructure.Services
 
             return new Result<SignInResponseDto>(
                 await GetSignInResponse(dto.Email));
-        } 
+        }
 
         public async Task<Result<SignInResponseDto>> RegisterAsync(RegisterUserDto dto)
         {
@@ -68,7 +63,7 @@ namespace Infrastructure.Services
 
             _domainDb.DomainUsers.Add(domainUser);
 
-            if(_domainDb.SaveChanges() <= 0)
+            if (_domainDb.SaveChanges() <= 0)
             {
                 return new Result<SignInResponseDto>(
                     new SignInFailureException(FailedToCreateUser));
@@ -85,10 +80,10 @@ namespace Infrastructure.Services
             var token = await _tokenService.CreateToken(user.Email);
 
             return new SignInResponseDto(
-                    user.Email, 
-                    user.Id, 
-                    user.Name, 
-                    user.Role, 
+                    user.Email,
+                    user.Id,
+                    user.Name,
+                    user.Role,
                     token);
         }
     }

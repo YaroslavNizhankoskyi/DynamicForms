@@ -1,14 +1,8 @@
-﻿using Application.Interfaces;
-using Application.Models.Dto;
+﻿using Application.Models.Dto;
 using Infrastructure.Data.Identity.Models;
 using Infrastructure.Services.Interfaces;
 using LanguageExt.Common;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
