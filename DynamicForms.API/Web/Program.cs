@@ -1,4 +1,6 @@
 using Infrastructure;
+using Infrastructure.Helpers;
+using Serilog;
 using Web.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +14,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddWeb(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 
+builder.Host.UseSerilog((ctx, lc) =>
+    lc.WriteTo.Console());
+
 var app = builder.Build();
+
+await app.Services.SeedDatabase();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
