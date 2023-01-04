@@ -8,6 +8,8 @@ namespace Infrastructure.Data.Helpers
 {
     internal static class AddAuthExtension
     {
+        private const string JWT_ISSUER_CONFIG = "Jwt:Issuer";
+        private const string JWT_KEY_CONFIG = "Jwt:Key";
         public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthorization();
@@ -27,10 +29,10 @@ namespace Infrastructure.Data.Helpers
                             ValidateAudience = true,
                             ValidateLifetime = true,
                             ValidateIssuerSigningKey = true,
-                            ValidIssuer = configuration["Jwt:Issuer"],
-                            ValidAudience = configuration["Jwt:Issuer"],
+                            ValidIssuer = configuration[JWT_ISSUER_CONFIG],
+                            ValidAudience = configuration[JWT_ISSUER_CONFIG],
                             IssuerSigningKey = new
-                            SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+                            SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration[JWT_KEY_CONFIG]))
                         };
                     });
 
