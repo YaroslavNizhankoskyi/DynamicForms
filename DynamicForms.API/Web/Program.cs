@@ -1,3 +1,6 @@
+using Application;
+using Application.Calls.Auth.Login;
+using FluentValidation;
 using Infrastructure;
 using Infrastructure.Helpers;
 using Serilog;
@@ -11,6 +14,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddApplication();
 builder.Services.AddWeb(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -19,7 +23,7 @@ builder.Host.UseSerilog((ctx, lc) =>
 
 var app = builder.Build();
 
-await app.Services.SeedDatabase();
+//await app.Services.SeedDatabase();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

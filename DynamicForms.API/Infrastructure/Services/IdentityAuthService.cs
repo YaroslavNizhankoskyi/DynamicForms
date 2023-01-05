@@ -1,4 +1,6 @@
-﻿using Application.Models.Dto;
+﻿using Application.Calls.Auth.Login;
+using Application.Calls.Auth.Register;
+using Application.Models.Dto;
 using Infrastructure.Data.Identity.Models;
 using Infrastructure.Services.Interfaces;
 using LanguageExt.Common;
@@ -27,7 +29,7 @@ namespace Infrastructure.Services
             this._signInManager = signInManager;
         }
 
-        public async Task<SignInResult> LoginAsync(LoginUserDto dto)
+        public async Task<SignInResult> LoginAsync(LoginCommand dto)
         {
             var user = await _userManager.FindByEmailAsync(dto.Email);
 
@@ -45,7 +47,7 @@ namespace Infrastructure.Services
             await _signInManager.SignOutAsync();
         }
 
-        public async Task<Result<Guid>> RegisterAsync(RegisterUserDto dto)
+        public async Task<Result<Guid>> RegisterAsync(RegisterCommand dto)
         {
             var existingUser = await _userManager.FindByEmailAsync(dto.Email);
 

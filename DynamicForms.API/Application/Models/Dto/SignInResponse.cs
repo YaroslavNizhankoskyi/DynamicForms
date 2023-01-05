@@ -1,6 +1,6 @@
 ﻿namespace Application.Models.Dto
 {
-    public record SignInResponseDto
+    public record SignInResponse
     (
         string Email,
         Guid Id,

@@ -1,4 +1,6 @@
-﻿using Application.Helpers.Exceptions;
+﻿using Application.Calls.Auth.Login;
+using Application.Calls.Auth.Register;
+using Application.Helpers.Exceptions;
 using Application.Interfaces;
 using Application.Models.Dto;
 using Domain;
@@ -27,29 +29,29 @@ namespace Infrastructure.Services
             this._userService = userService;
         }
 
-        public async Task<Result<SignInResponseDto>> LoginAsync(LoginUserDto dto)
+        public async Task<Result<SignInResponse>> LoginAsync(LoginCommand dto)
         {
             var idAuthResult = await _idenityAuthService.LoginAsync(dto);
 
             if (!idAuthResult.Succeeded)
             {
-                return new Result<SignInResponseDto>(
+                return new Result<SignInResponse>(
                     new SignInFailureException(FailedToSignIn));
             }
 
-            return new Result<SignInResponseDto>(
+            return new Result<SignInResponse>(
                 await GetSignInResponse(dto.Email));
         }
 
-        public async Task<Result<SignInResponseDto>> RegisterAsync(RegisterUserDto dto)
+        public async Task<Result<SignInResponse>> RegisterAsync(RegisterCommand dto)
         {
             var registerSignInResult = await _idenityAuthService.RegisterAsync(dto);
 
             if (registerSignInResult.IsFaulted)
             {
-                return registerSignInResult.Match<Result<SignInResponseDto>>
-                    (res => default(Result<SignInResponseDto>),
-                    exc => new Result<SignInResponseDto>(exc));
+                return registerSignInResult.Match<Result<SignInResponse>>
+                    (res => default(Result<SignInResponse>),
+                    exc => new Result<SignInResponse>(exc));
             }
 
             var id = registerSignInResult.Match<Guid>(x => x, exc => default(Guid));
@@ -65,21 +67,21 @@ namespace Infrastructure.Services
 
             if (_domainDb.SaveChanges() <= 0)
             {
-                return new Result<SignInResponseDto>(
+                return new Result<SignInResponse>(
                     new SignInFailureException(FailedToCreateUser));
             }
 
-            return new Result<SignInResponseDto>(
+            return new Result<SignInResponse>(
                 await GetSignInResponse(dto.Email));
         }
 
-        private async Task<SignInResponseDto> GetSignInResponse(string userEmail)
+        private async Task<SignInResponse> GetSignInResponse(string userEmail)
         {
             var user = await _userService.GetUserDetailsByEmail(userEmail);
 
             var token = await _tokenService.CreateToken(user.Email);
 
-            return new SignInResponseDto(
+            return new SignInResponse(
                     user.Email,
                     user.Id,
                     user.Name,
