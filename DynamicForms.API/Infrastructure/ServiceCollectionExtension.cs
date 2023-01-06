@@ -37,6 +37,8 @@ namespace Infrastructure
             services.AddScoped<ISignInService, SignInService>();
             services.AddScoped<IUserService, UserService>();
 
+            services.AddScoped<IDomainDbContext>(provider => provider.GetService<DomainDbContext>());
+
             return services;
         }
     }

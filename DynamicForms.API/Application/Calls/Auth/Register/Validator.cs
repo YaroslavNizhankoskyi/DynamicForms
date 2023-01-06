@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Calls.Auth.Register
 {
@@ -20,7 +15,7 @@ namespace Application.Calls.Auth.Register
                 .NotEmpty()
                 .Length(2, 50);
 
-            RuleFor(x => x.Password)                
+            RuleFor(x => x.Password)
                 .NotEmpty()
                 .Length(2, 50);
         }

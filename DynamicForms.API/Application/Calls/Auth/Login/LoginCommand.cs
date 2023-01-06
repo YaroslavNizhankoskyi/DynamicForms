@@ -4,11 +4,6 @@ using Application.Models.Dto;
 using FluentValidation;
 using LanguageExt.Common;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Calls.Auth.Login
 {
@@ -40,5 +35,5 @@ namespace Application.Calls.Auth.Login
         {
             return await _signInService.LoginAsync(request);
         }
-    }    
+    }
 }

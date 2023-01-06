@@ -1,11 +1,12 @@
-﻿using Domain;
+﻿using Application.Interfaces;
+using Domain;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Infrastructure.Data.Domain
 {
-    internal class DomainDbContext : DbContext
+    internal class DomainDbContext : DbContext, IDomainDbContext
     {
         public DbSet<InputAnswer> InputAnswers { get; set; }
         public DbSet<SelectAnswer> SelectAnswers { get; set; }

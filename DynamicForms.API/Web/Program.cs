@@ -1,8 +1,5 @@
 using Application;
-using Application.Calls.Auth.Login;
-using FluentValidation;
 using Infrastructure;
-using Infrastructure.Helpers;
 using Serilog;
 using Web.Helpers;
 

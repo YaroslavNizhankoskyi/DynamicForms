@@ -1,7 +1,5 @@
 ﻿using Application.Calls.Auth.Login;
 using Application.Calls.Auth.Register;
-using Application.Interfaces;
-using Application.Models.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

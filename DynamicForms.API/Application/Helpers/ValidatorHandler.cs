@@ -1,15 +1,9 @@
 ﻿using FluentValidation;
-using LanguageExt.Common;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Helpers
 {
-    public abstract class ValidatorHandler<TRequest, TResponse> : IRequestHandler<TRequest,TResponse>
+    public abstract class ValidatorHandler<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
             where TRequest : IRequest<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
@@ -43,7 +37,7 @@ namespace Application.Helpers
 
             var context = new ValidationContext<TRequest>(request);
 
-            var errorsDictionary = 
+            var errorsDictionary =
                 String.Join(";\n",
                     _validators
                     .Select(x => x.Validate(context))
@@ -56,7 +50,7 @@ namespace Application.Helpers
                              Key = propertyName,
                              Values = errorMessages.Distinct().ToArray()
                          })
-                    .Select(x => $"\" {x.Key} \": \"{String.Join(",",x.Values)} \""));
+                    .Select(x => $"\" {x.Key} \": \"{String.Join(",", x.Values)} \""));
 
             return errorsDictionary;
         }

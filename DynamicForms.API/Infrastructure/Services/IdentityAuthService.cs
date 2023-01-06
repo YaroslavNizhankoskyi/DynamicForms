@@ -1,6 +1,5 @@
 ﻿using Application.Calls.Auth.Login;
 using Application.Calls.Auth.Register;
-using Application.Models.Dto;
 using Infrastructure.Data.Identity.Models;
 using Infrastructure.Services.Interfaces;
 using LanguageExt.Common;

@@ -4,7 +4,6 @@ using Application.Helpers.Exceptions;
 using Application.Interfaces;
 using Application.Models.Dto;
 using Domain;
-using Infrastructure.Data.Domain;
 using Infrastructure.Services.Interfaces;
 using LanguageExt.Common;
 
@@ -16,11 +15,11 @@ namespace Infrastructure.Services
         private const string FailedToCreateUser = "Failed to register";
 
         private readonly IIdenityAuthService _idenityAuthService;
-        private readonly DomainDbContext _domainDb;
+        private readonly IDomainDbContext _domainDb;
         private readonly ITokenService _tokenService;
         private readonly IUserService _userService;
 
-        public SignInService(IIdenityAuthService idenityAuthService, DomainDbContext domainDb,
+        public SignInService(IIdenityAuthService idenityAuthService, IDomainDbContext domainDb,
             ITokenService tokenService, IUserService userService)
         {
             this._idenityAuthService = idenityAuthService;
