@@ -1,22 +1,21 @@
 using Application;
 using Infrastructure;
-using Serilog;
 using Web.Helpers;
+using Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddMidlleware();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddApplication();
+builder.Services.AddApplication(builder.Host);
 builder.Services.AddWeb(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 
-builder.Host.UseSerilog((ctx, lc) =>
-    lc.WriteTo.Console());
 
 var app = builder.Build();
 
@@ -28,6 +27,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

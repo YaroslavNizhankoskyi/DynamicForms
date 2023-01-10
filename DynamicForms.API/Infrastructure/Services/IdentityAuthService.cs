@@ -1,8 +1,8 @@
 ﻿using Application.Calls.Auth.Login;
 using Application.Calls.Auth.Register;
+using Application.Helpers.Exceptions;
 using Infrastructure.Data.Identity.Models;
 using Infrastructure.Services.Interfaces;
-using LanguageExt.Common;
 using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Services
@@ -46,14 +46,13 @@ namespace Infrastructure.Services
             await _signInManager.SignOutAsync();
         }
 
-        public async Task<Result<Guid>> RegisterAsync(RegisterCommand dto)
+        public async Task<Guid> RegisterAsync(RegisterCommand dto)
         {
             var existingUser = await _userManager.FindByEmailAsync(dto.Email);
 
             if (existingUser != null)
             {
-                return new Result<Guid>(
-                    new NullReferenceException(UserExists));
+                throw new NullReferenceException(UserExists);
             }
 
             var user = new User()
@@ -71,8 +70,7 @@ namespace Infrastructure.Services
 
                 var errorsCombined = String.Join(", ", errors);
 
-                return new Result<Guid>(
-                    new Exception(errorsCombined));
+                throw new CreateUserException(errorsCombined);
             }
 
             var signInRes = await _signInManager
@@ -80,11 +78,10 @@ namespace Infrastructure.Services
 
             if (!signInRes.Succeeded)
             {
-                return new Result<Guid>(
-                    new NullReferenceException(AfterRegisterSignInFailed));
+                throw new NullReferenceException(AfterRegisterSignInFailed);
             }
 
-            return new Result<Guid>(user.Id);
+            return user.Id;
         }
     }
 }

@@ -3,7 +3,6 @@ using Application.Calls.Auth.Register;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Web.Helpers;
 
 namespace Web.Controllers
 {
@@ -22,18 +21,13 @@ namespace Web.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCommand model)
         {
-            var result = await _sender.Send(model);
-
-            return result.ToOk();
+            return new OkObjectResult(await _sender.Send(model));
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterCommand model)
         {
-            var result = await _sender.Send(model);
-
-            return result.ToOk();
-
+            return new OkObjectResult(await _sender.Send(model));
         }
     }
 }
