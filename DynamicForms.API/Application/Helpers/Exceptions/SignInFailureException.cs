@@ -1,6 +1,8 @@
-﻿namespace Application.Helpers.Exceptions
+﻿using Application.Helpers.Exceptions.Base;
+
+namespace Application.Helpers.Exceptions
 {
-    public class SignInFailureException : Exception
+    public class SignInFailureException : AuthenticationException
     {
         public SignInFailureException()
         {

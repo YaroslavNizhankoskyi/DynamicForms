@@ -17,15 +17,10 @@ namespace Web.Controllers
             this._sender = sender;
         }
 
+        [HttpPost]
         public async Task<IActionResult> Create(CreateFormCommand command)
         {
             return new OkObjectResult(await _sender.Send(command));
-        }
-
-
-        public async Task<IActionResult> GetUserCreated()
-        {
-            throw new NotImplementedException();
         }
     }
 }

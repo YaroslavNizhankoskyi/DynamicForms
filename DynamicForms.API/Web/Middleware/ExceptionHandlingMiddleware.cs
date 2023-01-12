@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using Application.Helpers.Exceptions.Base;
+using FluentValidation;
+using System.Text.Json;
 
 namespace Web.Middleware
 {
@@ -18,7 +20,7 @@ namespace Web.Middleware
 
         private static async Task HandleException(HttpContext httpContext, Exception exception)
         {
-            var statusCode = StatusCodes.Status500InternalServerError;
+            var statusCode = GetStatusCodes(exception);
 
             var response = new
             {
@@ -34,5 +36,27 @@ namespace Web.Middleware
             await httpContext.Response.WriteAsync(JsonSerializer.Serialize(response));
         }
 
+        private static int GetStatusCodes(Exception exc)
+        {
+            if (exc is AuthorizationException
+                || exc is AuthenticationException)
+            {
+                return StatusCodes.Status401Unauthorized;
+            }
+            else if (exc is ForbiddenActionException)
+            {
+                return StatusCodes.Status403Forbidden;
+            }
+            else if(exc is NullReferenceException)
+            {
+                return StatusCodes.Status404NotFound;
+            }
+            else if(exc is ValidationException)
+            {
+                return StatusCodes.Status400BadRequest;
+            }
+
+            return StatusCodes.Status500InternalServerError;
+        }
     }
 }
