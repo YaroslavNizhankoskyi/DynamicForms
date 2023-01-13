@@ -4,15 +4,7 @@ using MediatR;
 
 namespace Application.Calls.Auth.Register
 {
-    public class RegisterCommand : IRequest<SignInResponse>
-    {
-        public string Email { get; init; }
-
-        public string UserName { get; init; }
-
-        public string Password { get; init; }
-    }
-
+    public record RegisterCommand(string Email, string UserName, string Password) : IRequest<SignInResponse>;
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, SignInResponse>
     {
         private readonly ISignInService _signInService;

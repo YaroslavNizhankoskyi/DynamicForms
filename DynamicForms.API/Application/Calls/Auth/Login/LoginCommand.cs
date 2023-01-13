@@ -4,11 +4,7 @@ using MediatR;
 
 namespace Application.Calls.Auth.Login
 {
-    public record LoginCommand : IRequest<SignInResponse>
-    {
-        public string Email { get; init; }
-        public string Password { get; init; }
-    }
+    public record LoginCommand(string Email, string Password) : IRequest<SignInResponse>;
 
     public class LoginCommandHandler : IRequestHandler<LoginCommand, SignInResponse>
     {
