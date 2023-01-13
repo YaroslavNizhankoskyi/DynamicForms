@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMidlleware();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(o => o.AddBearerTokenSupport());
 builder.Services.AddApplication(builder.Host);
 builder.Services.AddWeb(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);

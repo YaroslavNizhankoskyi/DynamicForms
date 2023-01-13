@@ -93,11 +93,15 @@ namespace Infrastructure.Data.Migrations.Identity
                         {
                             Id = new Guid("4c177013-3086-4f27-b700-bf02c1f327dc"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "543d76b4-513a-4ca1-86cd-86c1ca87bc43",
+                            ConcurrencyStamp = "9cc502ec-d4b7-422c-84a4-cad5557462b2",
                             Email = "seed1.df@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
+                            NormalizedEmail = "SEED1.DF@GMAIL.COM",
+                            NormalizedUserName = "SEED1.DF@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFkXxeDedDvEAopQkqHy1dQPUozlZuprB9fCUCEn7Z46tocKz1gtelgt7jlWTnN7tA==",
                             PhoneNumberConfirmed = false,
+                            SecurityStamp = "a49afc19-8448-42e7-8290-2a3daf456247",
                             TwoFactorEnabled = false,
                             UserName = "seed1.df@gmail.com"
                         },
@@ -105,11 +109,15 @@ namespace Infrastructure.Data.Migrations.Identity
                         {
                             Id = new Guid("44eb0b1c-3cda-4548-a5bf-7dcc79cf9a4c"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4ca1b4f3-0972-4535-b72a-52ac43974986",
+                            ConcurrencyStamp = "b9b19f31-2da3-4205-850c-0c37666a3c17",
                             Email = "seed2.df@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
+                            NormalizedEmail = "SEED2.DF@GMAIL.COM",
+                            NormalizedUserName = "SEED2.DF@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAECqBggVIFMON+LeUVv0uSB/Bx5mLtodMeY9uTfF7U1I6OhjbjgMokscgjf3yqQrfsw==",
                             PhoneNumberConfirmed = false,
+                            SecurityStamp = "6b915cac-d7a7-4d79-8ec5-6c59f9eee11d",
                             TwoFactorEnabled = false,
                             UserName = "seed2.df@gmail.com"
                         },
@@ -117,11 +125,15 @@ namespace Infrastructure.Data.Migrations.Identity
                         {
                             Id = new Guid("407f9516-94bd-4251-8756-822a582e7df6"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "57e94da1-045a-4c10-ad67-825139a53f35",
+                            ConcurrencyStamp = "e0738ccb-6721-49e6-b2a9-f2f58eec097f",
                             Email = "seed3.df@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
+                            NormalizedEmail = "SEED3.DF@GMAIL.COM",
+                            NormalizedUserName = "SEED3.DF@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL8XKOs2WjuwN7zlj8H2twGwwZjjMvmkZIHvkCgjgJt9ZolUUTIsgGItPsGjcrvC0w==",
                             PhoneNumberConfirmed = false,
+                            SecurityStamp = "0ee6e47e-bf3f-4633-8108-1ec958a67315",
                             TwoFactorEnabled = false,
                             UserName = "seed3.df@gmail.com"
                         });

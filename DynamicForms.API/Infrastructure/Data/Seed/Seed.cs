@@ -97,11 +97,15 @@ namespace Infrastructure.Data.Seed
 
             PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
 
-            users.Select(x =>
+            users = users.Select(x =>
             {
-                passwordHasher.HashPassword(x, "SeedPass1*");
+                x.PasswordHash = passwordHasher.HashPassword(x, "SeedPass1*");
+                x.NormalizedEmail = x.Email.ToUpper();
+                x.NormalizedUserName = x.UserName.ToUpper();
+                x.SecurityStamp = Guid.NewGuid().ToString("D");
+
                 return x;
-            });
+            }).ToList();
 
             modelBuilder.Entity<User>().HasData(users);
 
