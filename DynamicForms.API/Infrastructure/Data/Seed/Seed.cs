@@ -2,11 +2,6 @@
 using Infrastructure.Data.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Data.Seed
 {
@@ -117,7 +112,7 @@ namespace Infrastructure.Data.Seed
 
             var forms = new List<Form>
             {
-                new Form 
+                new Form
                 {
                     Name = "Seed seed1.df Form1",
                     CreatorId = Guid.Parse(DUserId1),

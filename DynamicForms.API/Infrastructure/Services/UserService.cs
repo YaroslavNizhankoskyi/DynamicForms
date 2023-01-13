@@ -9,11 +9,14 @@ namespace Infrastructure.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IDomainDbContext _dbContext;
 
-        public UserService(UserManager<User> userManager, ICurrentUserService currentUserService)
+        public UserService(UserManager<User> userManager, ICurrentUserService currentUserService,
+            IDomainDbContext dbContext)
         {
             this._userManager = userManager;
             this._currentUserService = currentUserService;
+            this._dbContext = dbContext;
         }
 
         public async Task<UserDetails> GetUserDetailsById(Guid id)
@@ -22,11 +25,14 @@ namespace Infrastructure.Services
 
             var role = (await _userManager.GetRolesAsync(user)).First();
 
+            var domainUser = _dbContext.DomainUsers.FirstOrDefault(x => x.UserAuthId == user.Id);
+
             var userDetails = new UserDetails(
                 user.Email,
                 role,
                 user.UserName,
-                user.Id
+                user.Id,
+                domainUser.Id
             );
 
             return userDetails;
@@ -38,11 +44,14 @@ namespace Infrastructure.Services
 
             var role = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
 
+            var domainUser = _dbContext.DomainUsers.FirstOrDefault(x => x.UserAuthId == user.Id);
+
             var userDetails = new UserDetails(
                 user.Email,
                 role,
                 user.UserName,
-                user.Id
+                user.Id,
+                domainUser.Id
             );
 
             return userDetails;

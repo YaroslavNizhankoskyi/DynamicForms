@@ -1,23 +1,16 @@
 ﻿using Application.Interfaces;
 using Application.Models.Dto;
-using AutoMapper;
 using Domain;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Calls.Forms.Get
 {
     public record GetFormsQuery() : IRequest<List<FormDetails>>;
-    
-    public class GetFormsQueryHandler<T> : IRequestHandler<T, List<FormDetails>>
+
+    public abstract class GetFormsQueryHandler<T> : IRequestHandler<T, List<FormDetails>>
         where T : GetFormsQuery
     {
         private readonly IDomainDbContext _dbContext;
-        private readonly IMapper _mapper;
 
         public GetFormsQueryHandler(IDomainDbContext dbContext)
         {

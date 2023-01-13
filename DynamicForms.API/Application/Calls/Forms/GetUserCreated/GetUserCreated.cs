@@ -1,44 +1,44 @@
 ﻿using Application.Calls.Forms.Get;
 using Application.Interfaces;
+using Application.Models;
 using Application.Models.Dto;
 using Domain;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Calls.Forms.GetUserCreated
 {
-    public record GetUserCreated : GetFormsQuery;
+    public record GetUserCreated : GetAllFormsQuery;
 
     public class GetUserCreatedHandler : GetFormsQueryHandler<GetUserCreated>
     {
         private readonly IDomainDbContext _dbContext;
-        private readonly ICurrentUserService _currentUser;
+        private readonly IUserService _userService;
+        private UserDetails user;
 
-        public GetUserCreatedHandler(IDomainDbContext dbContext, ICurrentUserService currentUser) : base(dbContext)
+        public GetUserCreatedHandler(IDomainDbContext dbContext, IUserService userService) : base(dbContext)
         {
             this._dbContext = dbContext;
-            this._currentUser = currentUser;
+            this._userService = userService;
         }
 
-        public override Task<List<Form>> Filter(IQueryable<Form> forms)
+        public override async Task<List<Form>> Filter(IQueryable<Form> forms)
         {
-            return forms
-                .Where(x => x.CreatorId == _currentUser.GetUserId())
-                .ToListAsync();
+            this.user = await _userService.GetCurrentUserDetails();
+
+            var t = forms
+                .Where(x => x.CreatorId == this.user.DomainId)
+                .ToList();
+
+            return t;
         }
 
         public override List<FormDetails> GetFormsWithDetails(List<Form> forms)
         {
             var mappedForms = base.GetFormsWithDetails(forms);
 
-            foreach(var form in mappedForms)
+            foreach (var form in mappedForms)
             {
                 var userPassed = _dbContext.FormSubmits
-                    .Where(x => x.UserId == _currentUser.GetUserId()
+                    .Where(x => x.UserId == this.user.DomainId
                     && x.FormId == form.Id)
                     .Any();
 

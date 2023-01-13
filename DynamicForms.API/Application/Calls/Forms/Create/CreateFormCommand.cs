@@ -37,7 +37,7 @@ namespace Application.Calls.Forms.Create
 
             var form = _mapper.Map<Form>(request);
 
-            form.CreatorId = user.Id;
+            form.CreatorId = user.DomainId;
             _dbContext.Forms.Add(form);
 
             if ((await _dbContext.SaveChangesAsync(cancellationToken)) != 0)

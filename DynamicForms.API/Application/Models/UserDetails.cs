@@ -4,6 +4,7 @@
         string Email,
         string Role,
         string Name,
-        Guid Id
+        Guid AuthId,
+        Guid DomainId
     );
 }

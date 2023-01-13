@@ -33,6 +33,7 @@ namespace Infrastructure.Services
             var claims = new List<Claim> {
                     new Claim(ClaimTypes.Email, identityUser.Email),
                     new Claim(ClaimTypes.Name, identityUser.UserName),
+                    new Claim(ClaimTypes.NameIdentifier, identityUser.Id.ToString())
             };
 
             var roles = await _userManager.GetRolesAsync(identityUser);

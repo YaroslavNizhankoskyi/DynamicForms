@@ -68,7 +68,7 @@ namespace Infrastructure.Services
 
             return new SignInResponse(
                     user.Email,
-                    user.Id,
+                    user.AuthId,
                     user.Name,
                     user.Role,
                     token);

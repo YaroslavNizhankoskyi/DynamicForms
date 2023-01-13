@@ -47,11 +47,11 @@ namespace Web.Middleware
             {
                 return StatusCodes.Status403Forbidden;
             }
-            else if(exc is NullReferenceException)
+            else if (exc is NullReferenceException)
             {
                 return StatusCodes.Status404NotFound;
             }
-            else if(exc is ValidationException)
+            else if (exc is ValidationException)
             {
                 return StatusCodes.Status400BadRequest;
             }

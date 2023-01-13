@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Web.Controllers
 {
     [Authorize]
-    [Route("api/auth")]
+    [Route("api/forms")]
     [ApiController]
     public class FormsController
     {
@@ -28,7 +28,7 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetForms()
         {
-            var command = new GetFormsQuery();
+            var command = new GetAllFormsQuery();
 
             return new OkObjectResult(await _sender.Send(command));
         }
