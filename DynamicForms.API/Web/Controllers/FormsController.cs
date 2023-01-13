@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     [Route("api/auth")]
     [ApiController]
     public class FormsController

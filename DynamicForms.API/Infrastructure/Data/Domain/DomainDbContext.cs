@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain;
 using Domain.Interfaces;
+using Infrastructure.Data.Seed;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -29,6 +30,8 @@ namespace Infrastructure.Data.Domain
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("domain");
+
+            modelBuilder.SeedDomain();
 
             //pluralize the name
             modelBuilder.Entity<PrivateFormAccessor>().ToTable("PrivateFormAccessors");

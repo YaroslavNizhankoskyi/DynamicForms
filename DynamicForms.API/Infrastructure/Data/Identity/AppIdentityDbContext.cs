@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Data.Identity.Models;
+using Infrastructure.Data.Seed;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,8 @@ namespace Infrastructure.Data.Identity
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("auth");
+
+            modelBuilder.SeedIdentity();
 
             base.OnModelCreating(modelBuilder);
         }
