@@ -1,5 +1,6 @@
 ﻿using Application.Calls.Forms.Create;
 using Application.Calls.Forms.Get;
+using Application.Calls.Forms.GetPublic;
 using Application.Calls.Forms.GetUserCreated;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -34,9 +35,17 @@ namespace Web.Controllers
         }
 
         [HttpGet("created")]
-        public async Task<IActionResult> GetUserCreatedFroms()
+        public async Task<IActionResult> GetUserCreatedForms()
         {
-            var command = new GetUserCreated();
+            var command = new GetUserCreatedForms();
+
+            return new OkObjectResult(await _sender.Send(command));
+        }
+
+        [HttpGet("public")]
+        public async Task<IActionResult> GetPublicForms()
+        {
+            var command = new GetPublicForms();
 
             return new OkObjectResult(await _sender.Send(command));
         }

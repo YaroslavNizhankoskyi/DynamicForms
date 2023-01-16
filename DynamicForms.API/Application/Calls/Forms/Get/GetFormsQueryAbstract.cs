@@ -21,7 +21,7 @@ namespace Application.Calls.Forms.Get
         {
             var filteredForms = await Filter(_dbContext.Forms.AsQueryable());
 
-            var mappedForms = GetFormsWithDetails(filteredForms);
+            var mappedForms = await GetFormsWithDetails(filteredForms);
 
             return mappedForms;
         }
@@ -31,7 +31,7 @@ namespace Application.Calls.Forms.Get
             return Task.FromResult(forms.ToList());
         }
 
-        public virtual List<FormDetails> GetFormsWithDetails(List<Form> forms)
+        public virtual Task<List<FormDetails>> GetFormsWithDetails(List<Form> forms)
         {
             var submits = _dbContext.FormSubmits.ToList();
 
@@ -47,7 +47,7 @@ namespace Application.Calls.Forms.Get
                     })
                 .ToList();
 
-            return createdForms;
+            return Task.FromResult(createdForms);
         }
     }
 }

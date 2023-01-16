@@ -6,15 +6,15 @@ using Domain;
 
 namespace Application.Calls.Forms.GetUserCreated
 {
-    public record GetUserCreated : GetAllFormsQuery;
+    public record GetUserCreatedForms : GetAllFormsQuery;
 
-    public class GetUserCreatedHandler : GetFormsQueryHandler<GetUserCreated>
+    public class GetUserCreatedFormsHandler : GetFormsQueryHandler<GetUserCreatedForms>
     {
         private readonly IDomainDbContext _dbContext;
         private readonly IUserService _userService;
         private UserDetails user;
 
-        public GetUserCreatedHandler(IDomainDbContext dbContext, IUserService userService) : base(dbContext)
+        public GetUserCreatedFormsHandler(IDomainDbContext dbContext, IUserService userService) : base(dbContext)
         {
             this._dbContext = dbContext;
             this._userService = userService;
@@ -31,9 +31,9 @@ namespace Application.Calls.Forms.GetUserCreated
             return t;
         }
 
-        public override List<FormDetails> GetFormsWithDetails(List<Form> forms)
+        public override async Task<List<FormDetails>> GetFormsWithDetails(List<Form> forms)
         {
-            var mappedForms = base.GetFormsWithDetails(forms);
+            var mappedForms = await base.GetFormsWithDetails(forms);
 
             foreach (var form in mappedForms)
             {
