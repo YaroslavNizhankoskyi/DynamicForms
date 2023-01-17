@@ -1,8 +1,6 @@
 /*eslint-disable*/
 // chakra imports
-import {
-  Box, useColorModeValue
-} from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import SidebarContent from "./SidebarContent";
 
@@ -13,7 +11,7 @@ function Sidebar(props) {
   const mainPanel = React.useRef();
   let variantChange = "0.2s linear";
 
-  const { logoText, routes, sidebarVariant } = props;
+  const { logoText, sidebarVariant } = props;
 
   //  BRAND
   //  Chakra Color Mode
@@ -47,18 +45,15 @@ function Sidebar(props) {
           m={sidebarMargins}
           borderRadius={sidebarRadius}
         >
-          <SidebarContent routes={routes}
-        logoText={"PURITY UI DASHBOARD"}
-        display="none"
-        sidebarVariant={sidebarVariant}
-        />
+          <SidebarContent
+            logoText={"PURITY UI DASHBOARD"}
+            display="none"
+            sidebarVariant={sidebarVariant}
+          />
         </Box>
       </Box>
     </Box>
   );
 }
-
-
-
 
 export default Sidebar;
