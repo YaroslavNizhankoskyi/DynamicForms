@@ -71,7 +71,7 @@ function SignUp() {
       <Box
         position="absolute"
         minH={{ base: "70vh", md: "50vh" }}
-        w={{ md: "calc(100vw - 50px)" }}
+        w="100%"
         borderRadius={{ md: "15px" }}
         left="0"
         right="0"
@@ -81,8 +81,6 @@ function SignUp() {
         top="0"
         bgImage={BgSignUp}
         bgSize="cover"
-        mx={{ md: "auto" }}
-        mt={{ md: "14px" }}
       ></Box>
       <Flex
         direction="column"

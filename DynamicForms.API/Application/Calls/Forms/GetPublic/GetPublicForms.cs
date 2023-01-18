@@ -1,4 +1,5 @@
-﻿using Application.Calls.Forms.Get;
+﻿using Application.Calls.Forms.Filters;
+using Application.Calls.Forms.Get;
 using Application.Interfaces;
 using Application.Models.Dto;
 using Domain;
@@ -20,14 +21,14 @@ namespace Application.Calls.Forms.GetPublic
         public GetPublicFormsHandler(IDomainDbContext dbContext,
             IUserService userService) : base(dbContext)
         {
-            this._dbContext = dbContext;
-            this._userService = userService;
+            _dbContext = dbContext;
+            _userService = userService;
         }
 
         public override Task<List<Form>> Filter(IQueryable<Form> forms)
         {
             return Task.FromResult(forms
-                .Where(x => x.Visibility == Visibility.Public)
+                .GetPublic(Visibility.Public)
                 .ToList());
         }
 
