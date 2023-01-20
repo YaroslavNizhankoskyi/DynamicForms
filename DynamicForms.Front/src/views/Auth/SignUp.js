@@ -20,6 +20,8 @@ import * as Yup from "yup";
 import BgSignUp from "assets/img/BgSignUp.png";
 import React from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
+import axios from "axios";
+import { setAuthToken } from "../../common/auth/headers/authHeader";
 
 function SignUp() {
   const titleColor = useColorModeValue("teal.300", "teal.200");
@@ -28,7 +30,7 @@ function SignUp() {
   const bgIcons = useColorModeValue("teal.200", "rgba(255, 255, 255, 0.5)");
   const errorBorder = "red.300";
 
-  const url = process.env.REACT_APP_APIUrl + "/auth/login";
+  const url = process.env.REACT_APP_APIUrl + "/auth/register";
 
   const signUpSchema = Yup.object().shape({
     email: Yup.string().email().required("Email is required"),
@@ -52,10 +54,10 @@ function SignUp() {
         if (response.data.token) {
           localStorage.setItem("userData", JSON.stringify(response.data));
           localStorage.setItem("token", response.data.token);
-          authHeader.setAuthToken(response.data.token);
+          setAuthToken(response.data.token);
           window.location.replace("/");
         } else {
-          alert("Login failed");
+          alert("Register failed");
         }
       });
     },
@@ -214,7 +216,6 @@ function SignUp() {
               mb="24px"
               size="lg"
             />
-            <FormErrorMessage>{fk.errors.userName}</FormErrorMessage>
           </FormControl>
           <FormControl isInvalid={fk.errors.email && fk.touched.email}>
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
@@ -234,7 +235,6 @@ function SignUp() {
               mb="24px"
               size="lg"
             />
-            <FormErrorMessage>{fk.errors.email}</FormErrorMessage>
           </FormControl>
           <FormControl isInvalid={fk.errors.password && fk.touched.password}>
             <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
@@ -254,7 +254,6 @@ function SignUp() {
               mb="24px"
               size="lg"
             />
-            <FormErrorMessage>{fk.errors.password}</FormErrorMessage>
           </FormControl>
           <FormControl display="flex" alignItems="center" mb="24px">
             <Switch id="remember-login" colorScheme="teal" me="10px" />

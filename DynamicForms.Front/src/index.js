@@ -22,9 +22,12 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { routes } from "routes";
 import { getRoutesFor } from "./common/routing/routingHelper";
 import { ChakraProvider } from "@chakra-ui/react";
+import "react-notifications/lib/notifications.css";
+import { NotificationContainer } from "react-notifications";
 
 ReactDOM.render(
   <ChakraProvider theme={theme} resetCss={false}>
+    <NotificationContainer />
     <BrowserRouter>
       <Switch>{getRoutesFor(routes, "index")}</Switch>
     </BrowserRouter>

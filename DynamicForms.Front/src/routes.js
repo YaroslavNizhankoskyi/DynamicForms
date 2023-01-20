@@ -18,12 +18,14 @@ import {
   SupportIcon,
 } from "components/Icons/Icons";
 import Home from "layouts/Home";
+import Guards from "common/models/Guards";
 
 export const routes = [
   {
     path: "/admin",
     name: "Admin",
-    component: Admin,
+    component: Dashboard,
+    guard: Guards.ADMIN,
     children: [
       {
         path: "/admin/dashboard",
@@ -49,12 +51,14 @@ export const routes = [
     path: "/account",
     name: "Account",
     component: Profile,
+    guard: Guards.AUTHENTICATED,
     children: [
       {
         path: "/account/profile",
         name: "Profile",
         icon: <PersonIcon color="inherit" />,
         secondaryNavbar: true,
+        guard: Guards.AUTHENTICATED,
         component: Profile,
       },
     ],
@@ -63,18 +67,21 @@ export const routes = [
     path: "/auth",
     name: "Auth",
     component: Auth,
+    guard: Guards.ANONYMOUS,
     children: [
       {
         path: "/auth/signin",
         name: "Sign In",
         icon: <DocumentIcon color="inherit" />,
         component: SignIn,
+        guard: Guards.ANONYMOUS,
       },
       {
         path: "/auth/signup",
         name: "Sign Up",
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,
+        guard: Guards.ANONYMOUS,
         component: SignUp,
       },
     ],
@@ -83,12 +90,14 @@ export const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    guard: Guards.NONE,
   },
 ];
 
 export const sidebar = [
   {
     category: "Admin",
+    guard: Guards.ADMIN,
     children: [
       {
         path: "/admin/dashboard",
@@ -112,6 +121,7 @@ export const sidebar = [
   },
   {
     category: "Account",
+    guard: Guards.AUTHENTICATED,
     children: [
       {
         path: "/account/profile",
@@ -126,6 +136,7 @@ export const sidebar = [
     path: "/auth/signin",
     name: "Sign In",
     icon: <DocumentIcon color="inherit" />,
+    guard: Guards.ANONYMOUS,
     component: SignIn,
   },
   {
@@ -133,6 +144,7 @@ export const sidebar = [
     name: "Sign Up",
     icon: <RocketIcon color="inherit" />,
     secondaryNavbar: true,
+    guard: Guards.ANONYMOUS,
     component: SignUp,
   },
 ];

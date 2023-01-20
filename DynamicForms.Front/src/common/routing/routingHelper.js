@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import AuthGuard from "common/auth/guards/AuthGuard";
 
 export function getActiveRoute(routes) {
   return "admin";
@@ -11,7 +11,14 @@ export function isActiveNavbar(routes) {
 export function getRoutesFor(routes, pathes) {
   if (pathes == "index") {
     return routes.map((el) => {
-      return <Route path={el.path} component={el.component} key={el.name} />;
+      return (
+        <AuthGuard
+          guard={el.guard}
+          path={el.path}
+          component={el.component}
+          key={el.name}
+        />
+      );
     });
   }
 
@@ -26,7 +33,14 @@ export function getRoutesFor(routes, pathes) {
   }
 
   return route.children.map((el) => {
-    return <Route path={el.path} component={el.component} key={el.name} />;
+    return (
+      <AuthGuard
+        guard={el.guard}
+        path={el.path}
+        component={el.component}
+        key={el.name}
+      />
+    );
   });
 
   return null;

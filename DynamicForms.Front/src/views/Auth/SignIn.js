@@ -15,6 +15,10 @@ import {
 } from "@chakra-ui/react";
 // Assets
 import signInImage from "assets/img/signInImage.png";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import { setAuthToken } from "common/auth/headers/authHeader";
 
 function SignIn() {
   // Chakra color mode
@@ -22,6 +26,36 @@ function SignIn() {
   const textColor = useColorModeValue("gray.400", "white");
 
   const url = process.env.REACT_APP_APIUrl + "/auth/login";
+  const errorBorder = "red.300";
+
+  const signInSchema = Yup.object().shape({
+    email: Yup.string()
+      .email()
+      .required("Email is required")
+      .min(5, "Invalid email"),
+    password: Yup.string().required("Password is required"),
+  });
+
+  const fk = useFormik({
+    //development only values
+    initialValues: {
+      email: "seed2.df@gmail.com",
+      password: "SeedPass1*",
+    },
+    validationSchema: signInSchema,
+    onSubmit: (values) => {
+      axios.post(url, values).then((response) => {
+        if (response.data.token) {
+          localStorage.setItem("userData", JSON.stringify(response.data));
+          localStorage.setItem("token", response.data.token);
+          setAuthToken(response.data.token);
+          window.location.replace("/");
+        } else {
+          alert("Login failed");
+        }
+      });
+    },
+  });
 
   return (
     <Flex position="relative" mb="40px">
@@ -59,7 +93,7 @@ function SignIn() {
             >
               Enter your email and password to sign in
             </Text>
-            <FormControl>
+            <FormControl isInvalid={fk.errors.email && fk.touched.email}>
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Email
               </FormLabel>
@@ -67,10 +101,17 @@ function SignIn() {
                 borderRadius="15px"
                 mb="24px"
                 fontSize="sm"
+                name="email"
                 type="text"
                 placeholder="Your email adress"
+                errorBorderColor={errorBorder}
+                value={fk.values.email}
+                onChange={fk.handleChange}
                 size="lg"
               />
+              <p>{fk.errors.email}</p>
+            </FormControl>
+            <FormControl isInvalid={fk.errors.password && fk.touched.password}>
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Password
               </FormLabel>
@@ -79,7 +120,11 @@ function SignIn() {
                 mb="36px"
                 fontSize="sm"
                 type="password"
+                name="password"
                 placeholder="Your password"
+                value={fk.values.password}
+                onChange={fk.handleChange}
+                errorBorderColor={errorBorder}
                 size="lg"
               />
               <FormControl display="flex" alignItems="center">
@@ -94,6 +139,9 @@ function SignIn() {
                 </FormLabel>
               </FormControl>
               <Button
+                onClick={fk.handleSubmit}
+                //disabled={!(fk.dirty && fk.isValid)}
+                disabled={!fk.isValid}
                 fontSize="10px"
                 type="submit"
                 bg="teal.300"

@@ -19,8 +19,13 @@ builder.Services.AddInfrastructure(builder.Configuration);
 var app = builder.Build();
 
 //await app.Services.SeedDatabase();
+app.UseCors(o =>
+    o.AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowAnyOrigin());
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
