@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import Sidebar from "components/Sidebar";
+import MainPanel from "./../components/Layout/MainPanel";
 
 function Home() {
-  return <h1>Home</h1>;
+  const [sidebarVariant, setSidebarVariant] = useState("opaque");
+
+  return (
+    <>
+      <Sidebar
+        logoText={"Dynamic Forms"}
+        display="none"
+        sidebarVariant={sidebarVariant}
+      />
+      <MainPanel></MainPanel>
+    </>
+  );
 }
 
 export default Home;
-<h1>Home</h1>;

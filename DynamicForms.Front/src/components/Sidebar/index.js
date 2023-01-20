@@ -46,7 +46,7 @@ function Sidebar(props) {
           borderRadius={sidebarRadius}
         >
           <SidebarContent
-            logoText={"PURITY UI DASHBOARD"}
+            logoText={"Dynamic Forms"}
             display="none"
             sidebarVariant={sidebarVariant}
           />

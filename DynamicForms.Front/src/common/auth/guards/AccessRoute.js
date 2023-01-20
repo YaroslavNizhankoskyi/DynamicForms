@@ -31,7 +31,7 @@ export function getRedirect(guard) {
       return <Redirect to={{ pathname: "/auth/signin" }} />;
     case Guards.ADMIN:
       NotificationManager.error(
-        `You are not in role ${role} to access this page`
+        `You are not in role ${guard} to access this page`
       );
       return <Redirect to={{ pathname: "/" }} />;
     case Guards.ANONYMOUS:

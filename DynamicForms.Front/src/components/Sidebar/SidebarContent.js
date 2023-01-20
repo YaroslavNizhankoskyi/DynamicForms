@@ -18,7 +18,7 @@ const SidebarContent = ({ logoText }) => {
           lineHeight="100%"
           mb="30px"
           fontWeight="bold"
-          justifyContent="center"
+          justifyContent="left"
           alignItems="center"
           fontSize="11px"
         >
