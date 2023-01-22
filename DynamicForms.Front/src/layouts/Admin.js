@@ -1,9 +1,9 @@
 // Chakra imports
-import { ChakraProvider, Portal, useDisclosure } from "@chakra-ui/react";
+import { Portal, useDisclosure } from "@chakra-ui/react";
 import Configurator from "components/Configurator/Configurator";
 import Footer from "components/Footer/Footer.js";
 // Layout components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
+import Navbar from "components/Navbars/Navbar.js";
 import Sidebar from "components/Sidebar";
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
@@ -17,11 +17,7 @@ import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
 import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
-import {
-  getRoutesFor,
-  isActiveNavbar,
-  getActiveRoute,
-} from "../common/routing/routingHelper";
+import { getRoutesFor } from "../common/routing/routingHelper";
 
 export default function Admin(props) {
   const { ...rest } = props;
@@ -46,11 +42,9 @@ export default function Admin(props) {
         }}
       >
         <Portal>
-          <AdminNavbar
+          <Navbar
             onOpen={onOpen}
-            logoText={"PURITY UI DASHBOARD"}
-            brandText={getActiveRoute(routes)}
-            secondary={isActiveNavbar(routes)}
+            logoText={"Dynamic Forms"}
             fixed={fixed}
             {...rest}
           />
@@ -65,14 +59,9 @@ export default function Admin(props) {
         </PanelContent>
         <Footer />
         <Portal>
-          <FixedPlugin
-            secondary={isActiveNavbar(routes)}
-            fixed={fixed}
-            onOpen={onOpen}
-          />
+          <FixedPlugin fixed={fixed} onOpen={onOpen} />
         </Portal>
         <Configurator
-          secondary={isActiveNavbar(routes)}
           isOpen={isOpen}
           onClose={onClose}
           isChecked={fixed}

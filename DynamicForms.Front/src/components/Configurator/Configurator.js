@@ -20,15 +20,16 @@ import { Separator } from "components/Separator/Separator";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { FaTwitter, FaFacebook } from "react-icons/fa";
+import { isActiveNavbar } from "../../common/routing/routingHelper";
 
 export default function Configurator(props) {
-  const { secondary, isOpen, onClose, fixed, ...rest } = props;
+  const { isOpen, onClose, fixed, ...rest } = props;
   const [switched, setSwitched] = useState(props.isChecked);
 
   const { colorMode, toggleColorMode } = useColorMode();
   // Chakra Color Mode
   let fixedDisplay = "flex";
-  if (props.secondary) {
+  if (isActiveNavbar()) {
     fixedDisplay = "none";
   }
 
@@ -230,7 +231,6 @@ export default function Configurator(props) {
   );
 }
 Configurator.propTypes = {
-  secondary: PropTypes.bool,
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
   fixed: PropTypes.bool,

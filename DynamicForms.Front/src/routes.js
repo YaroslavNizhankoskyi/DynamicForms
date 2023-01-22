@@ -24,26 +24,29 @@ export const routes = [
   {
     path: "/admin",
     name: "Admin",
-    component: Dashboard,
-    guard: Guards.ADMIN,
+    guard: Guards.AUTHENTICATED,
+    component: Admin,
     children: [
       {
         path: "/admin/dashboard",
         name: "Dashboard",
         icon: <HomeIcon color="inherit" />,
         component: Dashboard,
+        guard: Guards.AUTHENTICATED,
       },
       {
         path: "/admin/tables",
         name: "Tables",
         icon: <StatsIcon color="inherit" />,
         component: Tables,
+        guard: Guards.AUTHENTICATED,
       },
       {
         path: "/admin/billing",
         name: "Billing",
         icon: <CreditIcon color="inherit" />,
         component: Billing,
+        guard: Guards.AUTHENTICATED,
       },
     ],
   },

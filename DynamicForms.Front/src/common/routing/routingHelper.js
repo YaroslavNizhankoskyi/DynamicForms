@@ -1,10 +1,10 @@
 import AuthGuard from "common/auth/guards/AuthGuard";
 
-export function getActiveRoute(routes) {
+export function getActiveRoute() {
   return "admin";
 }
 
-export function isActiveNavbar(routes) {
+export function isActiveNavbar() {
   return false;
 }
 

@@ -10,19 +10,12 @@ import {
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import AdminNavbarLinks from "./AdminNavbarLinks";
+import NavbarLinks from "./NavbarLinks";
+import { isActiveNavbar } from "../../common/routing/routingHelper";
 
 export default function AdminNavbar(props) {
   const [scrolled, setScrolled] = useState(false);
-  const {
-    variant,
-    children,
-    fixed,
-    secondary,
-    brandText,
-    onOpen,
-    ...rest
-  } = props;
+  const brandText = "Admin";
 
   // Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
   let mainText = useColorModeValue("gray.700", "gray.200");
@@ -52,7 +45,7 @@ export default function AdminNavbar(props) {
         "drop-shadow(0px 7px 23px rgba(0, 0, 0, 0.05))"
       );
     }
-  if (props.secondary) {
+  if (isActiveNavbar()) {
     navbarBackdrop = "none";
     navbarPosition = "absolute";
     mainText = "white";
@@ -147,10 +140,10 @@ export default function AdminNavbar(props) {
           </Link>
         </Box>
         <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
-          <AdminNavbarLinks
+          <NavbarLinks
             onOpen={props.onOpen}
             logoText={props.logoText}
-            secondary={props.secondary}
+            secondary={isActiveNavbar()}
             fixed={props.fixed}
           />
         </Box>
@@ -160,9 +153,7 @@ export default function AdminNavbar(props) {
 }
 
 AdminNavbar.propTypes = {
-  brandText: PropTypes.string,
   variant: PropTypes.string,
-  secondary: PropTypes.bool,
   fixed: PropTypes.bool,
   onOpen: PropTypes.func,
 };

@@ -8,12 +8,12 @@ import React from "react";
 import SidebarNavs from "./SidebarNavs";
 
 const SidebarContent = ({ logoText }) => {
+  console.log(process.env.PUBLIC_URL);
   return (
     <>
       <Box pt={"25px"} mb="12px">
         <Link
-          href={`${process.env.PUBLIC_URL}`}
-          target="_blank"
+          href="/home"
           display="flex"
           lineHeight="100%"
           mb="30px"
