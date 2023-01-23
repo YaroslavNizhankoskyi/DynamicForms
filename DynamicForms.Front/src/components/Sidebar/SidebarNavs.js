@@ -3,6 +3,7 @@ import { sidebar } from "./../../routes";
 import { NavLink } from "react-router-dom";
 import IconBox from "components/Icons/IconBox";
 import { Button, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import { isAllowed } from "common/auth/guards/AccessRoute";
 
 function SidebarNavs() {
   const isActiveNav = (name) => {
@@ -16,129 +17,134 @@ function SidebarNavs() {
 
   const getSidebar = (sidebar) => {
     return sidebar.map((nav) => {
-      if (nav.category) {
+      if (isAllowed(nav.guard)) {
+        if (nav.category) {
+          return (
+            <div key={nav.category}>
+              <Text
+                color={activeColor}
+                fontWeight="bold"
+                mb={{
+                  xl: "12px",
+                }}
+                mx="auto"
+                ps={{
+                  sm: "10px",
+                  xl: "16px",
+                }}
+                py="12px"
+              >
+                {nav.category}
+              </Text>
+              {getSidebar(nav.children)}
+            </div>
+          );
+        }
+
         return (
-          <div key={nav.category}>
-            <Text
-              color={activeColor}
-              fontWeight="bold"
-              mb={{
-                xl: "12px",
-              }}
-              mx="auto"
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
-              py="12px"
-            >
-              {nav.category}
-            </Text>
-            {getSidebar(nav.children)}
-          </div>
+          <NavLink to={nav.path} key={nav.name}>
+            {isActiveNav(nav.name) ? (
+              <Button
+                boxSize="initial"
+                justifyContent="flex-start"
+                alignItems="center"
+                bg={activeBg}
+                mb={{
+                  xl: "12px",
+                }}
+                mx={{
+                  xl: "auto",
+                }}
+                ps={{
+                  sm: "10px",
+                  xl: "16px",
+                }}
+                py="12px"
+                borderRadius="15px"
+                _hover="none"
+                w="100%"
+                _active={{
+                  bg: "inherit",
+                  transform: "none",
+                  borderColor: "transparent",
+                }}
+                _focus={{
+                  boxShadow: "none",
+                }}
+              >
+                <Flex>
+                  {typeof nav.icon === "string" ? (
+                    <Icon>{nav.icon}</Icon>
+                  ) : (
+                    <IconBox
+                      bg="teal.300"
+                      color="white"
+                      h="30px"
+                      w="30px"
+                      me="12px"
+                    >
+                      {nav.icon}
+                    </IconBox>
+                  )}
+                  <Text color={activeColor} my="auto" fontSize="sm">
+                    {nav.name}
+                  </Text>
+                </Flex>
+              </Button>
+            ) : (
+              <Button
+                boxSize="initial"
+                justifyContent="flex-start"
+                alignItems="center"
+                bg="transparent"
+                mb={{
+                  xl: "12px",
+                }}
+                mx={{
+                  xl: "auto",
+                }}
+                py="12px"
+                ps={{
+                  sm: "10px",
+                  xl: "16px",
+                }}
+                borderRadius="15px"
+                _hover="none"
+                w="100%"
+                _active={{
+                  bg: "inherit",
+                  transform: "none",
+                  borderColor: "transparent",
+                }}
+                _focus={{
+                  boxShadow: "none",
+                }}
+              >
+                <Flex>
+                  {typeof nav.icon === "string" ? (
+                    <Icon as={nav.icon}>{nav.icon}</Icon>
+                  ) : (
+                    <IconBox
+                      bg={inactiveBg}
+                      color="teal.300"
+                      h="30px"
+                      w="30px"
+                      me="12px"
+                    >
+                      {nav.icon}
+                    </IconBox>
+                  )}
+                  <Text color={inactiveColor} my="auto" fontSize="sm">
+                    {nav.name}
+                  </Text>
+                </Flex>
+              </Button>
+            )}
+          </NavLink>
         );
       }
-      return (
-        <NavLink to={nav.path} key={nav.name}>
-          {isActiveNav(nav.name) ? (
-            <Button
-              boxSize="initial"
-              justifyContent="flex-start"
-              alignItems="center"
-              bg={activeBg}
-              mb={{
-                xl: "12px",
-              }}
-              mx={{
-                xl: "auto",
-              }}
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
-              py="12px"
-              borderRadius="15px"
-              _hover="none"
-              w="100%"
-              _active={{
-                bg: "inherit",
-                transform: "none",
-                borderColor: "transparent",
-              }}
-              _focus={{
-                boxShadow: "none",
-              }}
-            >
-              <Flex>
-                {typeof nav.icon === "string" ? (
-                  <Icon>{nav.icon}</Icon>
-                ) : (
-                  <IconBox
-                    bg="teal.300"
-                    color="white"
-                    h="30px"
-                    w="30px"
-                    me="12px"
-                  >
-                    {nav.icon}
-                  </IconBox>
-                )}
-                <Text color={activeColor} my="auto" fontSize="sm">
-                  {nav.name}
-                </Text>
-              </Flex>
-            </Button>
-          ) : (
-            <Button
-              boxSize="initial"
-              justifyContent="flex-start"
-              alignItems="center"
-              bg="transparent"
-              mb={{
-                xl: "12px",
-              }}
-              mx={{
-                xl: "auto",
-              }}
-              py="12px"
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
-              borderRadius="15px"
-              _hover="none"
-              w="100%"
-              _active={{
-                bg: "inherit",
-                transform: "none",
-                borderColor: "transparent",
-              }}
-              _focus={{
-                boxShadow: "none",
-              }}
-            >
-              <Flex>
-                {typeof nav.icon === "string" ? (
-                  <Icon>{nav.icon}</Icon>
-                ) : (
-                  <IconBox
-                    bg={inactiveBg}
-                    color="teal.300"
-                    h="30px"
-                    w="30px"
-                    me="12px"
-                  >
-                    {nav.icon}
-                  </IconBox>
-                )}
-                <Text color={inactiveColor} my="auto" fontSize="sm">
-                  {nav.name}
-                </Text>
-              </Flex>
-            </Button>
-          )}
-        </NavLink>
-      );
+
+      return <></>;
     });
   };
 

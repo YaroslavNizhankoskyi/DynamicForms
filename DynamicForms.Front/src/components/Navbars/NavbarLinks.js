@@ -27,7 +27,6 @@ import SidebarResponsive from "components/Sidebar/SidebarResponsive";
 import PropTypes from "prop-types";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { routes } from "routes.js";
 
 export default function HeaderLinks(props) {
   const { variant, children, fixed, secondary, onOpen, ...rest } = props;
@@ -38,6 +37,16 @@ export default function HeaderLinks(props) {
   let mainText = useColorModeValue("gray.700", "gray.200");
   let navbarIcon = useColorModeValue("gray.500", "gray.200");
   let searchIcon = useColorModeValue("gray.700", "gray.200");
+
+  let userData = localStorage.getItem("userData");
+  let isAuthenticated = false;
+  let authLink = "/auth/signin";
+
+  if (userData) {
+    authLink = "/account/profile";
+    userData = JSON.parse(userData);
+    isAuthenticated = true;
+  }
 
   if (secondary) {
     navbarIcon = "white";
@@ -93,7 +102,8 @@ export default function HeaderLinks(props) {
           borderRadius="inherit"
         />
       </InputGroup>
-      <NavLink to="/auth/signin">
+
+      <NavLink to={authLink}>
         <Button
           ms="0px"
           px="0px"
@@ -115,9 +125,16 @@ export default function HeaderLinks(props) {
             )
           }
         >
-          <Text display={{ sm: "none", md: "flex" }}>Sign In</Text>
+          {isAuthenticated ? (
+            <Text display={{ sm: "none", md: "flex" }}>
+              {userData.userName}
+            </Text>
+          ) : (
+            <Text display={{ sm: "none", md: "flex" }}>Sign In</Text>
+          )}
         </Button>
       </NavLink>
+
       <SidebarResponsive
         logoText={props.logoText}
         secondary={props.secondary}

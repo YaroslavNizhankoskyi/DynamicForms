@@ -7,6 +7,8 @@ import SignIn from "views/Auth/SignIn.js";
 import SignUp from "views/Auth/SignUp.js";
 import Auth from "layouts/Auth.js";
 import Admin from "layouts/Admin.js";
+import SignOut from "views/Auth/SignOut";
+import { MdLogout } from "react-icons/md";
 
 import {
   HomeIcon,
@@ -70,7 +72,7 @@ export const routes = [
     path: "/auth",
     name: "Auth",
     component: Auth,
-    guard: Guards.ANONYMOUS,
+    guard: Guards.NONE,
     children: [
       {
         path: "/auth/signin",
@@ -86,6 +88,14 @@ export const routes = [
         secondaryNavbar: true,
         guard: Guards.ANONYMOUS,
         component: SignUp,
+      },
+      {
+        path: "/auth/signout",
+        name: "Sign Out",
+        icon: <MdLogout />,
+        secondaryNavbar: true,
+        guard: Guards.AUTHENTICATED,
+        component: SignOut,
       },
     ],
   },
@@ -107,18 +117,21 @@ export const sidebar = [
         name: "Dashboard",
         icon: <HomeIcon color="inherit" />,
         component: Dashboard,
+        guard: Guards.ADMIN,
       },
       {
         path: "/admin/tables",
         name: "Tables",
         icon: <StatsIcon color="inherit" />,
         component: Tables,
+        guard: Guards.ADMIN,
       },
       {
         path: "/admin/billing",
         name: "Billing",
         icon: <CreditIcon color="inherit" />,
         component: Billing,
+        guard: Guards.ADMIN,
       },
     ],
   },
@@ -132,22 +145,37 @@ export const sidebar = [
         icon: <PersonIcon color="inherit" />,
         secondaryNavbar: true,
         component: Profile,
+        guard: Guards.AUTHENTICATED,
       },
     ],
   },
   {
-    path: "/auth/signin",
-    name: "Sign In",
-    icon: <DocumentIcon color="inherit" />,
-    guard: Guards.ANONYMOUS,
-    component: SignIn,
-  },
-  {
-    path: "/auth/signup",
-    name: "Sign Up",
-    icon: <RocketIcon color="inherit" />,
-    secondaryNavbar: true,
-    guard: Guards.ANONYMOUS,
-    component: SignUp,
+    category: "Sign",
+    guard: Guards.NONE,
+    children: [
+      {
+        path: "/auth/signin",
+        name: "Sign In",
+        icon: <DocumentIcon color="inherit" />,
+        guard: Guards.ANONYMOUS,
+        component: SignIn,
+      },
+      {
+        path: "/auth/signup",
+        name: "Sign Up",
+        icon: <RocketIcon color="inherit" />,
+        secondaryNavbar: true,
+        guard: Guards.ANONYMOUS,
+        component: SignUp,
+      },
+      {
+        path: "/auth/signup",
+        name: "Sign Out",
+        icon: <MdLogout color="inherit" />,
+        secondaryNavbar: true,
+        guard: Guards.AUTHENTICATED,
+        component: SignOut,
+      },
+    ],
   },
 ];
