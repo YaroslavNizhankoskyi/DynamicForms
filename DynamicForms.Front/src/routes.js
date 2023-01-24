@@ -89,14 +89,6 @@ export const routes = [
         guard: Guards.ANONYMOUS,
         component: SignUp,
       },
-      {
-        path: "/auth/signout",
-        name: "Sign Out",
-        icon: <MdLogout />,
-        secondaryNavbar: true,
-        guard: Guards.AUTHENTICATED,
-        component: SignOut,
-      },
     ],
   },
   {
@@ -169,12 +161,11 @@ export const sidebar = [
         component: SignUp,
       },
       {
-        path: "/auth/signup",
         name: "Sign Out",
         icon: <MdLogout color="inherit" />,
         secondaryNavbar: true,
         guard: Guards.AUTHENTICATED,
-        component: SignOut,
+        onClick: SignOut,
       },
     ],
   },
