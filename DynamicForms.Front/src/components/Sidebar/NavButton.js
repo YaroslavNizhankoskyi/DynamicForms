@@ -3,8 +3,11 @@ import IconBox from "components/Icons/IconBox";
 import { Button, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 
 function NavButton({ isActive, onClick, nav }) {
-  let bg = useColorModeValue("white", "gray.700");
-  let color = useColorModeValue("gray.700", isActive ? "white" : "gray.400");
+  let bg = useColorModeValue(isActive ? "gray.100" : "white", "gray.700");
+  let color = useColorModeValue(
+    isActive ? "gray.700" : "gray.400",
+    isActive ? "white" : "gray.400"
+  );
 
   return (
     <Button
