@@ -4,6 +4,7 @@ const PanelContent = {
     me: "auto",
     ps: "15px",
     pe: "15px",
+    px: "30px",
   },
 };
 

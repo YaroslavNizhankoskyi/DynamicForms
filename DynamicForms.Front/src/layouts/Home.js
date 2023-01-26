@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Sidebar from "components/Sidebar";
 import MainPanel from "./../components/Layout/MainPanel";
-import { Portal, useDisclosure } from "@chakra-ui/react";
+import { Portal, useDisclosure, Flex } from "@chakra-ui/react";
 import Configurator from "components/Configurator/Configurator";
 import Navbar from "components/Navbars/Navbar";
 import PanelContent from "components/Layout/PanelContent";
 import { isActiveNavbar } from "common/routing/routingHelper";
+import HomeHeaderNav from "views/Home/HomeHeaderNav";
+import PanelContainer from "components/Layout/PanelContainer";
 
 function Home() {
   const [sidebarVariant, setSidebarVariant] = useState("opaque");
@@ -18,11 +20,22 @@ function Home() {
         display="none"
         sidebarVariant={sidebarVariant}
       />
-      <MainPanel>
+      <MainPanel
+        w={{
+          base: "100%",
+          xl: "calc(100% - 275px)",
+        }}
+      >
         <Portal>
           <Navbar onOpen={onOpen} logoText={"Dynamic Forms"} fixed={fixed} />
         </Portal>
-        <PanelContent></PanelContent>
+        <PanelContent>
+          <PanelContainer>
+            <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
+              <HomeHeaderNav />
+            </Flex>
+          </PanelContainer>
+        </PanelContent>
         <Configurator
           secondary={isActiveNavbar()}
           isOpen={isOpen}
