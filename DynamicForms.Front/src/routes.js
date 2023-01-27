@@ -8,7 +8,7 @@ import SignUp from "views/Auth/SignUp.js";
 import Auth from "layouts/Auth.js";
 import Admin from "layouts/Admin.js";
 import SignOut from "views/Auth/SignOut";
-import { MdLogout } from "react-icons/md";
+import { MdLogout, MdDynamicForm } from "react-icons/md";
 
 import {
   HomeIcon,
@@ -21,12 +21,13 @@ import {
 } from "components/Icons/Icons";
 import Home from "layouts/Home";
 import Guards from "common/models/Guards";
+import DynamicFormsBuilder from "views/Builder";
 
 export const routes = [
   {
     path: "/admin",
     name: "Admin",
-    guard: Guards.AUTHENTICATED,
+    guard: Guards.NONE,
     component: Admin,
     children: [
       {
@@ -34,21 +35,21 @@ export const routes = [
         name: "Dashboard",
         icon: <HomeIcon color="inherit" />,
         component: Dashboard,
-        guard: Guards.AUTHENTICATED,
+        guard: Guards.NONE,
       },
       {
         path: "/admin/tables",
         name: "Tables",
         icon: <StatsIcon color="inherit" />,
         component: Tables,
-        guard: Guards.AUTHENTICATED,
+        guard: Guards.NONE,
       },
       {
         path: "/admin/billing",
         name: "Billing",
         icon: <CreditIcon color="inherit" />,
         component: Billing,
-        guard: Guards.AUTHENTICATED,
+        guard: Guards.NONE,
       },
     ],
   },
@@ -56,14 +57,14 @@ export const routes = [
     path: "/account",
     name: "Account",
     component: Profile,
-    guard: Guards.AUTHENTICATED,
+    guard: Guards.NONE,
     children: [
       {
         path: "/account/profile",
         name: "Profile",
         icon: <PersonIcon color="inherit" />,
         secondaryNavbar: true,
-        guard: Guards.AUTHENTICATED,
+        guard: Guards.NONE,
         component: Profile,
       },
     ],
@@ -79,17 +80,23 @@ export const routes = [
         name: "Sign In",
         icon: <DocumentIcon color="inherit" />,
         component: SignIn,
-        guard: Guards.ANONYMOUS,
+        guard: Guards.NONE,
       },
       {
         path: "/auth/signup",
         name: "Sign Up",
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,
-        guard: Guards.ANONYMOUS,
+        guard: Guards.NONE,
         component: SignUp,
       },
     ],
+  },
+  {
+    path: "/builder",
+    name: "Form Builder",
+    component: DynamicFormsBuilder,
+    guard: Guards.NONE
   },
   {
     path: "/",
@@ -102,34 +109,47 @@ export const routes = [
 export const sidebar = [
   {
     category: "Admin",
-    guard: Guards.ADMIN,
+    guard: Guards.NONE,
     children: [
       {
         path: "/admin/dashboard",
         name: "Dashboard",
         icon: <HomeIcon color="inherit" />,
         component: Dashboard,
-        guard: Guards.ADMIN,
+        guard: Guards.NONE,
       },
       {
         path: "/admin/tables",
         name: "Tables",
         icon: <StatsIcon color="inherit" />,
         component: Tables,
-        guard: Guards.ADMIN,
+        guard: Guards.NONE,
       },
       {
         path: "/admin/billing",
         name: "Billing",
         icon: <CreditIcon color="inherit" />,
         component: Billing,
-        guard: Guards.ADMIN,
+        guard: Guards.NONE,
       },
     ],
   },
   {
+    category: "Builder",
+    guard: Guards.NONE,
+    children: [
+      {
+        path: "/builder",
+        name: "Form Builder",
+        component: DynamicFormsBuilder,
+        icon: <MdDynamicForm />,
+        guard: Guards.NONE
+      },
+    ]
+  },
+  {
     category: "Account",
-    guard: Guards.AUTHENTICATED,
+    guard: Guards.NONE,
     children: [
       {
         path: "/account/profile",
@@ -137,7 +157,7 @@ export const sidebar = [
         icon: <PersonIcon color="inherit" />,
         secondaryNavbar: true,
         component: Profile,
-        guard: Guards.AUTHENTICATED,
+        guard: Guards.NONE,
       },
     ],
   },
@@ -149,7 +169,7 @@ export const sidebar = [
         path: "/auth/signin",
         name: "Sign In",
         icon: <DocumentIcon color="inherit" />,
-        guard: Guards.ANONYMOUS,
+        guard: Guards.NONE,
         component: SignIn,
       },
       {
@@ -157,14 +177,14 @@ export const sidebar = [
         name: "Sign Up",
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,
-        guard: Guards.ANONYMOUS,
+        guard: Guards.NONE,
         component: SignUp,
       },
       {
         name: "Sign Out",
         icon: <MdLogout color="inherit" />,
         secondaryNavbar: true,
-        guard: Guards.AUTHENTICATED,
+        guard: Guards.NONE,
         onClick: SignOut,
       },
     ],

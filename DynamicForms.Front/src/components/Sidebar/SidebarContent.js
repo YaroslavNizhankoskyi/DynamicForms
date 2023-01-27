@@ -6,27 +6,14 @@ import { Separator } from "components/Separator/Separator";
 import { SidebarHelp } from "components/Sidebar/SidebarHelp";
 import React from "react";
 import SidebarNavs from "./SidebarNavs";
+import HomeLink from "./HomeLink";
 
 const SidebarContent = ({ logoText }) => {
   console.log(process.env.PUBLIC_URL);
   return (
     <>
       <Box pt={"25px"} mb="12px">
-        <Link
-          href="/home"
-          display="flex"
-          lineHeight="100%"
-          mb="30px"
-          fontWeight="bold"
-          justifyContent="left"
-          alignItems="center"
-          fontSize="11px"
-        >
-          <CreativeTimLogo w="32px" h="32px" me="10px" />
-          <Text fontSize="sm" mt="3px">
-            {logoText}
-          </Text>
-        </Link>
+        <HomeLink logoText={logoText}></HomeLink>
         <Separator></Separator>
       </Box>
       <Stack direction="column" mb="40px">

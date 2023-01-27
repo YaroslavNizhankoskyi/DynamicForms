@@ -46,7 +46,7 @@ function HomeHeaderNav() {
               <Text size={"xs"} textAlign={"center"}>
                 Start building forms now!
               </Text>
-              <Link textAlign={"center"} as={NavLink} to="/admin/dashboard">
+              <Link textAlign={"center"} as={NavLink} to="/builder">
                 <Button
                   leftIcon={<MdDynamicForm />}
                   variant="outline"
