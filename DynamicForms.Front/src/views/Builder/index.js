@@ -8,20 +8,26 @@ import MainPanel from "components/Layout/MainPanel";
 function DynamicFormsBuilder() {
   return (
     <Grid
-      bg={'blackAlpha.200'}
-      p={'10px'}
-      templateRows={'repeat(8, 1fr)'}
-      templateColumns={'repeat(6, 1fr)'}
+      bg={"blackAlpha.200"}
+      p={"10px"}
+      templateRows={"repeat(8, 1fr)"}
+      templateColumns={"repeat(6, 1fr)"}
       gap={4}
-      h={'100vh'}>
-      <GridItem rowSpan={1} colSpan={6} bg={'whiteAlpha.800'} rounded={'md'}
-        display={'flex'}>
+      h={"100vh"}
+    >
+      <GridItem
+        rowSpan={1}
+        colSpan={6}
+        bg={"whiteAlpha.800"}
+        rounded={"md"}
+        display={"flex"}
+      >
         <BuilderNavbar />
       </GridItem>
-      <GridItem rowSpan={7} colSpan={1} bg={'whiteAlpha.800'} rounded={'md'}>
+      <GridItem rowSpan={7} colSpan={1} bg={"whiteAlpha.800"} rounded={"md"}>
         <Controls />
       </GridItem>
-      <GridItem rowSpan={7} colSpan={5} bg={'whiteAlpha.800'} rounded={'md'}>
+      <GridItem rowSpan={7} colSpan={5} bg={"whiteAlpha.800"} rounded={"md"}>
         <FormBuilder />
       </GridItem>
     </Grid>
