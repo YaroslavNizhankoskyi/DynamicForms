@@ -1,7 +1,9 @@
 import { Box, Text, Divider, Stack } from "@chakra-ui/react";
-import React from "react";
+import { DragDropContext, Droppable } from "@hello-pangea/dnd";
+import React, { useState } from "react";
+import controls from "variables/controls";
 
-function FormBuilder() {
+function FormBuilder({ controls }) {
   return (
     <Stack
       px={"30px"}
@@ -19,9 +21,29 @@ function FormBuilder() {
         FORM
       </Text>
       <Divider borderTop={"1px solid #a1a1a1"}></Divider>
-      <Box display={"flex"} minH={"80%"} w={"100%"} bg={"gray.200"}>
-        {" "}
-      </Box>
+      <Droppable droppableId="formBuilder">
+        {(provided) => {
+          return (
+            <div
+              style={{
+                minHeight: "80%px",
+                width: "100%",
+                backgroundColor: "gray.200",
+                display: "flex",
+              }}
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              <Box>
+                {controls.map((el, idx) => {
+                  return <p key={idx}>{el}</p>;
+                })}
+                {provided.placeholder}
+              </Box>
+            </div>
+          );
+        }}
+      </Droppable>
     </Stack>
   );
 }

@@ -4,17 +4,17 @@ import { TbNumbers } from "react-icons/tb";
 const controls = [
   {
     name: "Text",
-    type: "text_input",
+    id: "text_input",
     icon: MdTextFields,
   },
   {
     name: "Number",
-    type: "number_input",
+    id: "number_input",
     icon: TbNumbers,
   },
   {
     name: "Email",
-    type: "email_input",
+    id: "email_input",
     icon: MdOutlineEmail,
   },
 ];
