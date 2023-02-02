@@ -16,21 +16,23 @@
 
 */
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import theme from "theme/theme.js";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 import { routes } from "routes";
 import { getRoutesFor } from "./common/routing/routingHelper";
 import { ChakraProvider } from "@chakra-ui/react";
 import "react-notifications/lib/notifications.css";
 import { NotificationContainer } from "react-notifications";
 
-ReactDOM.render(
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+
+root.render(
   <ChakraProvider theme={theme} resetCss={false}>
     <NotificationContainer />
     <BrowserRouter>
       <Switch>{getRoutesFor(routes, "index")}</Switch>
     </BrowserRouter>
-  </ChakraProvider>,
-  document.getElementById("root")
+  </ChakraProvider>
 );
