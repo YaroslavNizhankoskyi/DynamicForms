@@ -4,7 +4,7 @@ import React from "react";
 
 function ControlIcon({ control, index }) {
   return (
-    <Draggable draggableId={control.id} index={index}>
+    <Draggable draggableId={control.type} index={index}>
       {(provided) => {
         return (
           <div

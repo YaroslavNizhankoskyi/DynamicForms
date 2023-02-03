@@ -12,10 +12,9 @@ function DynamicFormsBuilder() {
   const handleOnDragEnd = (result) => {
     let items = [...controls];
 
-    let controlIcon = controlIcons.find((el) => el.id == result.draggableId);
+    let controlIcon = controlIcons.find((el) => el.type == result.draggableId);
 
     let control = {
-      type: result.draggableId,
       id: Date.now(),
       validation: {},
       settings: {},

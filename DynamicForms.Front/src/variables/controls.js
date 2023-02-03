@@ -7,21 +7,21 @@ import TextInput from "views/Builder/controls/TextInput";
 const controls = [
   {
     name: "Text",
-    id: "text_input",
+    type: "text_input",
     icon: MdTextFields,
     component: TextInput,
     defaultVariant: "control",
   },
   {
     name: "Number",
-    id: "number_input",
+    type: "number_input",
     icon: TbNumbers,
     component: NumberInput,
     defaultVariant: "control",
   },
   {
     name: "Email",
-    id: "email_input",
+    type: "email_input",
     icon: MdOutlineEmail,
     component: EmailInput,
     defaultVariant: "control",

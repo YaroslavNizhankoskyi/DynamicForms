@@ -15,39 +15,35 @@ function FormControl({ control, onDelete, openSetup }) {
 
   const [isFocused, setIsFocused] = useState(false);
 
+  const handleOnBlur = (event) => {
+    setTimeout(() => setIsFocused(false), 200);
+  };
+
   return (
-    <HStack
-      p="10px"
-      onFocus={() => setIsFocused(true)}
-      onBlur={() => setIsFocused(false)}
-    >
+    <HStack p="10px" onFocus={() => setIsFocused(true)} onBlur={handleOnBlur}>
       <ChakraControl variant={"control"}>
         <FormLabel>{control.name}</FormLabel>
         <Component variant={control.defaultVariant}></Component>
         {isValid ? <></> : <Text as="u">{error}</Text>}
       </ChakraControl>
-      {isFocused ? (
-        <VStack>
-          <IconButton
-            bg="blue.400"
-            aria-label="Settigns"
-            icon={<MdSettingsApplications size={"sm"} />}
-            size={"sm"}
-            rounded="6px"
-            onClick={openSetup}
-          />
-          <IconButton
-            bg={"red.400"}
-            aria-label="Delete"
-            icon={<MdOutlineDeleteForever size={"sm"} />}
-            size={"sm"}
-            rounded={"6px"}
-            onClick={() => onDelete(control.id)}
-          />
-        </VStack>
-      ) : (
-        <></>
-      )}
+      <VStack display={isFocused ? "inherit" : "none"}>
+        <IconButton
+          bg="blue.400"
+          aria-label="Settigns"
+          icon={<MdSettingsApplications size={"32px"} />}
+          size={"sm"}
+          rounded="6px"
+          onClick={openSetup}
+        />
+        <IconButton
+          bg={"red.400"}
+          aria-label="Delete"
+          icon={<MdOutlineDeleteForever size={"32px"} />}
+          size={"sm"}
+          rounded={"6px"}
+          onClick={(e) => onDelete(e, control.id)}
+        />
+      </VStack>
     </HStack>
   );
 }

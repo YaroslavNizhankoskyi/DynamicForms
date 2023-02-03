@@ -5,7 +5,8 @@ import FormControl from "./controls/FormControl";
 import controls from "variables/controls";
 
 function FormBuilder({ controls, setControls, openSetup }) {
-  const onDeleteControl = (id) => {
+  const onDeleteControl = (event, id) => {
+    event.preventDefault();
     let copy = [...controls];
     const controlIndex = copy.findIndex((el) => el.id === id);
     copy.splice(controlIndex, 1);
@@ -49,7 +50,7 @@ function FormBuilder({ controls, setControls, openSetup }) {
                     return (
                       <FormControl
                         control={el}
-                        key={idx}
+                        key={el.id}
                         onDelete={onDeleteControl}
                         openSetup={openSetup}
                       />

@@ -27,7 +27,7 @@ function Controls() {
               </Box>
               <Divider borderTop={"1px solid #a1a1a1"}></Divider>
               {controls.map((el, idx) => (
-                <ControlIcon key={el.id} index={idx} control={el} />
+                <ControlIcon key={el.type} index={idx} control={el} />
               ))}
               {provided.placeholder}
             </Stack>
