@@ -1,9 +1,17 @@
 import { Box, Text, Divider, Stack } from "@chakra-ui/react";
-import { DragDropContext, Droppable } from "@hello-pangea/dnd";
-import React, { useState } from "react";
+import { Droppable } from "@hello-pangea/dnd";
+import React from "react";
+import FormControl from "./controls/FormControl";
 import controls from "variables/controls";
 
-function FormBuilder({ controls }) {
+function FormBuilder({ controls, setControls, openSetup }) {
+  const onDeleteControl = (id) => {
+    let copy = [...controls];
+    const controlIndex = copy.findIndex((el) => el.id === id);
+    copy.splice(controlIndex, 1);
+    setControls(copy);
+  };
+
   return (
     <Stack
       px={"30px"}
@@ -20,30 +28,40 @@ function FormBuilder({ controls }) {
       >
         FORM
       </Text>
-      <Divider borderTop={"1px solid #a1a1a1"}></Divider>
-      <Droppable droppableId="formBuilder">
-        {(provided) => {
-          return (
-            <div
-              style={{
-                minHeight: "80%px",
-                width: "100%",
-                backgroundColor: "gray.200",
-                display: "flex",
-              }}
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              <Box>
-                {controls.map((el, idx) => {
-                  return <p key={idx}>{el}</p>;
-                })}
-                {provided.placeholder}
-              </Box>
-            </div>
-          );
-        }}
-      </Droppable>
+      <Divider></Divider>
+      <Box pt="20px" bg="whiteAlpha.800" h={"90%"}>
+        <Droppable droppableId="formBuilder">
+          {(provided) => {
+            return (
+              <div
+                style={{
+                  minHeight: "80%",
+                  width: "100%",
+                  backgroundColor: "gray.200",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                <Stack direction={"column"} w="100%">
+                  {controls.map((el, idx) => {
+                    return (
+                      <FormControl
+                        control={el}
+                        key={idx}
+                        onDelete={onDeleteControl}
+                        openSetup={openSetup}
+                      />
+                    );
+                  })}
+                  {provided.placeholder}
+                </Stack>
+              </div>
+            );
+          }}
+        </Droppable>
+      </Box>
     </Stack>
   );
 }

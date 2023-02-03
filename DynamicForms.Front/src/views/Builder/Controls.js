@@ -1,6 +1,6 @@
 import { Box, Divider, SimpleGrid, Text, Stack } from "@chakra-ui/react";
 import React from "react";
-import ControlIcon from "./Controls/ControlIcon";
+import ControlIcon from "./controls/ControlIcon";
 import controls from "variables/controls";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 

@@ -3,17 +3,31 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import Controls from "./Controls";
 import FormBuilder from "./FormBuilder";
 import BuilderNavbar from "./BuilderNavbar";
-import MainPanel from "components/Layout/MainPanel";
 import { DragDropContext } from "@hello-pangea/dnd";
+import controlIcons from "variables/controls";
 
 function DynamicFormsBuilder() {
   let [controls, setControls] = useState([]);
 
   const handleOnDragEnd = (result) => {
-    console.log(result);
-    let items = Array.from(controls);
-    items.push(result.draggableId);
+    let items = [...controls];
+
+    let controlIcon = controlIcons.find((el) => el.id == result.draggableId);
+
+    let control = {
+      type: result.draggableId,
+      id: Date.now(),
+      validation: {},
+      settings: {},
+      ...controlIcon,
+    };
+
+    items.push(control);
     setControls(items);
+  };
+
+  const openSetup = (control) => {
+    console.log(control);
   };
 
   return (
@@ -38,8 +52,12 @@ function DynamicFormsBuilder() {
         <GridItem rowSpan={7} colSpan={1} bg={"whiteAlpha.800"} rounded={"md"}>
           <Controls />
         </GridItem>
-        <GridItem rowSpan={7} colSpan={5} bg={"whiteAlpha.800"} rounded={"md"}>
-          <FormBuilder controls={controls} />
+        <GridItem rowSpan={7} colSpan={5} bg={"gray.500"} rounded={"md"}>
+          <FormBuilder
+            controls={controls}
+            setControls={setControls}
+            openSetup={openSetup}
+          />
         </GridItem>
       </Grid>
     </DragDropContext>
