@@ -1,4 +1,4 @@
-import { Input, InputGroup, InputLeftAddon } from "@chakra-ui/react";
+import { Input, InputGroup } from "@chakra-ui/react";
 import React from "react";
 
 function TextInput() {

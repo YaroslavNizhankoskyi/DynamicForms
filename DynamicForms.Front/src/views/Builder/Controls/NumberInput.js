@@ -1,15 +1,21 @@
-import { NumberInputField } from "@chakra-ui/react";
+import {
+  NumberInputField,
+  NumberInput as ChakraNumberInput,
+  NumberIncrementStepper,
+  NumberInputStepper,
+  NumberDecrementStepper,
+} from "@chakra-ui/react";
 import React from "react";
 
 function NumberInput() {
   return (
-    <NumberInput allowMouseWheel>
+    <ChakraNumberInput allowMouseWheel variant={"control"}>
       <NumberInputField />
       <NumberInputStepper>
         <NumberIncrementStepper />
         <NumberDecrementStepper />
       </NumberInputStepper>
-    </NumberInput>
+    </ChakraNumberInput>
   );
 }
 
