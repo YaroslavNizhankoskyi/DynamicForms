@@ -5,8 +5,6 @@ import FormBuilder from "./FormBuilder";
 import BuilderNavbar from "./BuilderNavbar";
 import { DragDropContext } from "@hello-pangea/dnd";
 import controlIcons from "variables/controls";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import { setupDefaultValidation } from "common/builder/validation/yupSchemaCreator";
 
 function DynamicFormsBuilder() {
@@ -26,15 +24,9 @@ function DynamicFormsBuilder() {
 
     setupDefaultValidation(control);
 
-    console.log(control.validation.schema);
-
     items.push(control);
 
     setControls(items);
-  };
-
-  const openSetup = (control) => {
-    console.log(control);
   };
 
   return (
@@ -60,11 +52,7 @@ function DynamicFormsBuilder() {
           <Controls />
         </GridItem>
         <GridItem rowSpan={7} colSpan={5} bg={"gray.500"} rounded={"md"}>
-          <FormBuilder
-            controls={controls}
-            setControls={setControls}
-            openSetup={openSetup}
-          />
+          <FormBuilder controls={controls} setControls={setControls} />
         </GridItem>
       </Grid>
     </DragDropContext>

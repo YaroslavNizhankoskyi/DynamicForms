@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Text,
   FormControl as ChakraControl,
@@ -7,12 +7,16 @@ import {
   VStack,
   IconButton,
   Box,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { MdSettingsApplications, MdOutlineDeleteForever } from "react-icons/md";
+import ConfigDrawer from "../drawer/ConfigDrawer";
 
-function FormControl({ control, onDelete, openSetup }) {
+function FormControl({ control, onDelete }) {
   const ComponentInput = control.component;
-  let isValid = true;
+
+  const btnRef = useRef();
+  const disclosure = useDisclosure();
 
   const [isFocused, setIsFocused] = useState(false);
 
@@ -25,7 +29,6 @@ function FormControl({ control, onDelete, openSetup }) {
       <ChakraControl variant={"control"}>
         <FormLabel>{control.name}</FormLabel>
         <ComponentInput variant={control.defaultVariant}></ComponentInput>
-        {isValid ? <></> : <Text as="u">{error}</Text>}
       </ChakraControl>
       <Box w={"33px"}>
         <VStack display={isFocused ? "inherit" : "none"}>
@@ -35,7 +38,8 @@ function FormControl({ control, onDelete, openSetup }) {
             icon={<MdSettingsApplications size={"32px"} />}
             size={"sm"}
             rounded="6px"
-            onClick={openSetup}
+            onClick={disclosure.onOpen}
+            ref={btnRef}
           />
           <IconButton
             bg={"red.400"}
@@ -47,6 +51,7 @@ function FormControl({ control, onDelete, openSetup }) {
           />
         </VStack>
       </Box>
+      <ConfigDrawer btnRef={btnRef} disclosure={disclosure}></ConfigDrawer>
     </HStack>
   );
 }

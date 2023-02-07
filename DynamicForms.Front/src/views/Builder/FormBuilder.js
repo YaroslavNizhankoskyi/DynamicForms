@@ -4,7 +4,7 @@ import React from "react";
 import FormControl from "./controls/FormControl";
 import controls from "variables/controls";
 
-function FormBuilder({ controls, setControls, openSetup }) {
+function FormBuilder({ controls, setControls }) {
   const onDeleteControl = (event, id) => {
     event.preventDefault();
     let copy = [...controls];
@@ -52,7 +52,6 @@ function FormBuilder({ controls, setControls, openSetup }) {
                         control={el}
                         key={el.id}
                         onDelete={onDeleteControl}
-                        openSetup={openSetup}
                       />
                     );
                   })}
