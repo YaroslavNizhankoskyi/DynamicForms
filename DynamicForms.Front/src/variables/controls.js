@@ -11,6 +11,10 @@ const controls = [
     icon: MdTextFields,
     component: TextInput,
     defaultVariant: "control",
+    validation: {
+      validationType: "string",
+      usedValidators: ["string_max", "string_min", "required"],
+    },
   },
   {
     name: "Number",
@@ -18,6 +22,10 @@ const controls = [
     icon: TbNumbers,
     component: NumberInput,
     defaultVariant: "control",
+    validation: {
+      validationType: "number",
+      usedValidators: ["number_max", "number_min", "required"],
+    },
   },
   {
     name: "Email",
@@ -25,6 +33,10 @@ const controls = [
     icon: MdOutlineEmail,
     component: EmailInput,
     defaultVariant: "control",
+    validation: {
+      validationType: "string",
+      usedValidators: ["email_max", "email_min", "required"],
+    },
   },
 ];
 

@@ -5,23 +5,31 @@ import FormBuilder from "./FormBuilder";
 import BuilderNavbar from "./BuilderNavbar";
 import { DragDropContext } from "@hello-pangea/dnd";
 import controlIcons from "variables/controls";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { setupDefaultValidation } from "common/builder/validation/yupSchemaCreator";
 
 function DynamicFormsBuilder() {
   let [controls, setControls] = useState([]);
 
   const handleOnDragEnd = (result) => {
     let items = [...controls];
-
-    let controlIcon = controlIcons.find((el) => el.type == result.draggableId);
+    let controlIconData = controlIcons.find(
+      (el) => el.type == result.draggableId
+    );
 
     let control = {
       id: Date.now(),
-      validation: {},
       settings: {},
-      ...controlIcon,
+      ...controlIconData,
     };
 
+    setupDefaultValidation(control);
+
+    console.log(control.validation.schema);
+
     items.push(control);
+
     setControls(items);
   };
 

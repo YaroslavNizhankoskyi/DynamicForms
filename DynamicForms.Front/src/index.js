@@ -24,9 +24,12 @@ import { getRoutesFor } from "./common/routing/routingHelper";
 import { ChakraProvider } from "@chakra-ui/react";
 import "react-notifications/lib/notifications.css";
 import { NotificationContainer } from "react-notifications";
+import { addCustomYupValidators } from "common/builder/validation/addCustomYupValidators";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
+
+addCustomYupValidators();
 
 root.render(
   <ChakraProvider theme={theme} resetCss={false}>

@@ -33,7 +33,7 @@ function SignUp() {
   const url = process.env.REACT_APP_APIUrl + "/auth/register";
 
   const signUpSchema = Yup.object().shape({
-    email: Yup.string().email().required("Email is required"),
+    email: Yup.string().required("Email is required").email(),
     password: Yup.string()
       .required("Password is required")
       .min(4, "Password is too short - should be 4 chars min"),
