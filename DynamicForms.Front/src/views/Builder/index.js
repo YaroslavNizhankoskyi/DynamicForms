@@ -24,6 +24,7 @@ function DynamicFormsBuilder() {
 
     setupDefaultValidation(control);
 
+    console.log(control);
     items.push(control);
 
     setControls(items);

@@ -23,12 +23,13 @@ function FormControl({ control, onDelete }) {
   const handleOnBlur = (event) => {
     setTimeout(() => setIsFocused(false), 200);
   };
+  let some = {};
 
   return (
     <HStack p="10px" onFocus={() => setIsFocused(true)} onBlur={handleOnBlur}>
-      <ChakraControl variant={"control"}>
+      <ChakraControl {...control.inputConfig}>
         <FormLabel>{control.name}</FormLabel>
-        <ComponentInput variant={control.defaultVariant}></ComponentInput>
+        <ComponentInput control={control}></ComponentInput>
       </ChakraControl>
       <Box w={"33px"}>
         <VStack display={isFocused ? "inherit" : "none"}>
@@ -51,7 +52,11 @@ function FormControl({ control, onDelete }) {
           />
         </VStack>
       </Box>
-      <ConfigDrawer btnRef={btnRef} disclosure={disclosure}></ConfigDrawer>
+      <ConfigDrawer
+        btnRef={btnRef}
+        disclosure={disclosure}
+        control={control}
+      ></ConfigDrawer>
     </HStack>
   );
 }

@@ -9,10 +9,25 @@ import {
   DrawerCloseButton,
   Input,
   Button,
+  VStack,
 } from "@chakra-ui/react";
+import ConfigList from "./ConfigsList";
+import { useFormik } from "formik";
 
-function ConfigDrawer({ btnRef, disclosure }) {
+function ConfigDrawer({ btnRef, disclosure, control }) {
   const { isOpen, onOpen, onClose } = disclosure;
+
+  const formik = useFormik({
+    initialValues: { ...control.inputConfig },
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
+  const onSave = (e) => {
+    formik.handleSubmit(e);
+    onClose(e);
+  };
 
   return (
     <>
@@ -28,14 +43,16 @@ function ConfigDrawer({ btnRef, disclosure }) {
           <DrawerHeader>Config control</DrawerHeader>
 
           <DrawerBody>
-            <Input placeholder="Type here..." />
+            <ConfigList control={control} formik={formik} />
           </DrawerBody>
 
           <DrawerFooter>
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue">Save</Button>
+            <Button onClick={onSave} colorScheme="blue">
+              Save
+            </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

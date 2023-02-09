@@ -7,9 +7,9 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-function NumberInput() {
+function NumberInput({ control }) {
   return (
-    <ChakraNumberInput allowMouseWheel variant={"control"}>
+    <ChakraNumberInput allowMouseWheel {...control.inputConfig}>
       <NumberInputField />
       <NumberInputStepper>
         <NumberIncrementStepper />

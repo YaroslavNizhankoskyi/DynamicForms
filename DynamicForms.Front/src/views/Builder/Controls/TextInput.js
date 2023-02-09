@@ -1,10 +1,10 @@
 import { Input, InputGroup } from "@chakra-ui/react";
 import React from "react";
 
-function TextInput() {
+function TextInput({ control }) {
   return (
-    <InputGroup variant="control">
-      <Input />
+    <InputGroup>
+      <Input {...control.inputConfig} />
     </InputGroup>
   );
 }
