@@ -16,7 +16,7 @@ const controls = [
     },
     validation: {
       validationType: "string",
-      usedValidators: ["string_max", "string_min", "required"],
+      usedValidators: ["string_max", "string_min", "isRequired"],
     },
   },
   {
@@ -30,7 +30,7 @@ const controls = [
     },
     validation: {
       validationType: "number",
-      usedValidators: ["number_max", "number_min", "required"],
+      usedValidators: ["number_max", "number_min", "isRequired"],
     },
   },
   {
@@ -44,7 +44,7 @@ const controls = [
     },
     validation: {
       validationType: "string",
-      usedValidators: ["email_max", "email_min", "required"],
+      usedValidators: ["email_max", "email_min", "isRequired"],
     },
   },
 ];

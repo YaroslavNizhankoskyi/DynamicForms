@@ -12,7 +12,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import ConfigList from "./ConfigsList";
-import { useFormik } from "formik";
+import { useFormik, validateYupSchema } from "formik";
 
 function ConfigDrawer({ btnRef, disclosure, control }) {
   const { isOpen, onOpen, onClose } = disclosure;
@@ -20,7 +20,25 @@ function ConfigDrawer({ btnRef, disclosure, control }) {
   const formik = useFormik({
     initialValues: { ...control.inputConfig },
     onSubmit: (values) => {
-      console.log(values);
+      console.log(control);
+
+      for (let key in values) {
+        if (control.inputConfig[key]) {
+          control.inputConfig[key] = values[key];
+        }
+
+        let validator = control.validation.validatorsData.find(
+          (el) => el.type == key
+        );
+
+        if (validator) {
+          validator.params = Array.isArray(values[key])
+            ? values[key]
+            : [values[key]];
+        }
+      }
+
+      console.log(control);
     },
   });
 

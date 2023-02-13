@@ -23,8 +23,6 @@ function FormControl({ control, onDelete }) {
   const handleOnBlur = (event) => {
     setTimeout(() => setIsFocused(false), 200);
   };
-  let some = {};
-
   return (
     <HStack p="10px" onFocus={() => setIsFocused(true)} onBlur={handleOnBlur}>
       <ChakraControl {...control.inputConfig}>

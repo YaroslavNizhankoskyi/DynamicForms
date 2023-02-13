@@ -1,6 +1,6 @@
 const validators = {
-  required: {
-    type: "boolRequired",
+  isRequired: {
+    type: "isRequired",
     text: "Required",
     error: "Given value is required",
     valueType: "boolean",

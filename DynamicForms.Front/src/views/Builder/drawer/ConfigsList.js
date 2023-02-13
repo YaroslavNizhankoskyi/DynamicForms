@@ -65,14 +65,17 @@ function ConfigList({ control, formik }) {
   const onChangeEditable = (e) => {
     let editables = [...configEditables];
     let value = null;
+    let name = null;
 
     if (e.target.type && e.target.type == "checkbox") {
       value = e.target.checked;
+      name = e.target.name;
     } else {
       value = e.target.value;
+      name = e.target.name;
     }
 
-    let editable = editables.find((el) => el.name == e.target.name);
+    let editable = editables.find((el) => el.name == name);
     editable.value = value;
 
     setConfigEditables(editables);
@@ -85,7 +88,7 @@ function ConfigList({ control, formik }) {
       {configEditables.map((el, idx) => {
         let valueObject =
           el.valueType == "boolean"
-            ? { checked: el.value }
+            ? { isChecked: el.value }
             : { value: el.value };
         return (
           <FormControl key={idx}>
