@@ -11,7 +11,7 @@ const validators = {
     text: "Max number value",
     error: "Entered number is too big",
     valueType: "number",
-    params: [Number.MAX_VALUE],
+    params: [1000000],
   },
   string_max: {
     type: "max",
@@ -32,7 +32,7 @@ const validators = {
     text: "Min number value",
     error: "Entered number is too small",
     valueType: "number",
-    params: [Number.MIN_VALUE],
+    params: [-1000000],
   },
   string_min: {
     type: "min",
