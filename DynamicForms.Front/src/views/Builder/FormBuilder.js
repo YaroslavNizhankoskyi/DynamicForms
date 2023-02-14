@@ -18,8 +18,8 @@ function FormBuilder({ controls, setControls }) {
       px={"30px"}
       pt="20px"
       justifyContent={"start"}
-      h={"100%"}
       alignContent={"start"}
+      pb={"30px"}
     >
       <Text
         fontSize={"22"}
@@ -30,7 +30,13 @@ function FormBuilder({ controls, setControls }) {
         FORM
       </Text>
       <Divider></Divider>
-      <Box pt="20px" bg="whiteAlpha.800" h={"90%"}>
+      <Box
+        minH={"500px"}
+        pt="20px"
+        bg="whiteAlpha.800"
+        h={"90%"}
+        rounded={"sm"}
+      >
         <Droppable droppableId="formBuilder">
           {(provided) => {
             return (
