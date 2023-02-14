@@ -11,7 +11,7 @@ const controls = [
     icon: MdTextFields,
     component: TextInput,
     inputConfig: {
-      placeholder: "test",
+      placeholder: "",
       variant: "control",
     },
     validation: {
@@ -25,7 +25,7 @@ const controls = [
     icon: TbNumbers,
     component: NumberInput,
     inputConfig: {
-      placeholder: "test",
+      placeholder: "",
       variant: "control",
     },
     validation: {
@@ -39,7 +39,7 @@ const controls = [
     icon: MdOutlineEmail,
     component: EmailInput,
     inputConfig: {
-      placeholder: "test",
+      placeholder: "",
       variant: "control",
     },
     validation: {

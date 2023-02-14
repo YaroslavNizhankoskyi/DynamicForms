@@ -1,21 +1,24 @@
-import React from "react";
-import { Link, Text } from "@chakra-ui/react";
-import { CreativeTimLogo } from "components/Icons/Icons";
+import React, { createElement } from "react";
+import { Link, Text, Icon } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 
-function HomeLink({ logoText }) {
+function NavImageLink({ logoText, logo, link, iconSize }) {
+  iconSize ??= "32px";
+
   return (
     <Link
       as={NavLink}
-      to="/home"
+      to={link}
       display="flex"
       lineHeight="100%"
       fontWeight="bold"
       justifyContent="left"
       alignItems="center"
       fontSize="11px"
+      h="32px"
     >
-      <CreativeTimLogo display={"flex"} w="32px" h="32px" me="10px" />
+      <Icon h={iconSize} w={iconSize} me="8px" as={logo}></Icon>
+
       <Text fontSize="sm" mt="3px" display={"flex"}>
         {logoText}
       </Text>
@@ -23,4 +26,4 @@ function HomeLink({ logoText }) {
   );
 }
 
-export default HomeLink;
+export default NavImageLink;

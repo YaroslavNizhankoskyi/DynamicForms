@@ -1,13 +1,13 @@
-import { Stack, SimpleGrid, Box } from "@chakra-ui/react";
-import HomeLink from "components/Sidebar/HomeLink";
-import NavButton from "components/Sidebar/NavButton";
+import { Box, HStack } from "@chakra-ui/react";
+import NavImageLink from "components/Sidebar/NavImageLink";
 import React from "react";
-import { sidebar } from "routes";
+import { CreativeTimLogo } from "components/Icons/Icons";
+import { FaRegEye } from "react-icons/fa";
 
 function BuilderNavbar() {
   return (
-    <SimpleGrid
-      row={8}
+    <HStack
+      col={8}
       spacing={10}
       justifyContent={"left"}
       alignItems={"center"}
@@ -16,8 +16,18 @@ function BuilderNavbar() {
       w="100%"
       px="20px"
     >
-      <HomeLink logoText={"Home"}></HomeLink>
-    </SimpleGrid>
+      <NavImageLink
+        logoText={"Home"}
+        logo={CreativeTimLogo}
+        link="/home"
+      ></NavImageLink>
+      <NavImageLink
+        logoText={"Preview Form"}
+        logo={FaRegEye}
+        link="/home"
+        iconSize="25px"
+      ></NavImageLink>
+    </HStack>
   );
 }
 
