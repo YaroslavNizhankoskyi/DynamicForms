@@ -20,11 +20,10 @@ function ConfigDrawer({ btnRef, disclosure, control }) {
   const formik = useFormik({
     initialValues: { ...control.inputConfig },
     onSubmit: (values) => {
-      console.log(control);
-
       for (let key in values) {
-        if (control.inputConfig[key]) {
+        if (key in control.inputConfig) {
           control.inputConfig[key] = values[key];
+          continue;
         }
 
         let validator = control.validation.validatorsData.find(
@@ -37,8 +36,6 @@ function ConfigDrawer({ btnRef, disclosure, control }) {
             : [values[key]];
         }
       }
-
-      console.log(control);
     },
   });
 

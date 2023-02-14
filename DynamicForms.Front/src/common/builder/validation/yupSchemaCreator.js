@@ -23,7 +23,6 @@ export function buildControlSchema(control) {
       return;
     }
 
-    console.log(type, params);
     validator = validator[type](...params, error);
   });
 

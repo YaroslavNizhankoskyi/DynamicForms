@@ -27,8 +27,6 @@ function DynamicFormsBuilder() {
     setControls(items);
   };
 
-  const handleOpenPreview = () => {};
-
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <Box

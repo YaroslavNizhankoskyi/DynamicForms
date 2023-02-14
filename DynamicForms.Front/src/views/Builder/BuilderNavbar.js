@@ -1,10 +1,14 @@
-import { Box, HStack } from "@chakra-ui/react";
+import { HStack, Button } from "@chakra-ui/react";
 import NavImageLink from "components/Sidebar/NavImageLink";
 import React from "react";
 import { CreativeTimLogo } from "components/Icons/Icons";
 import { FaRegEye } from "react-icons/fa";
 
-function BuilderNavbar() {
+function BuilderNavbar({ controls }) {
+  const handleOpenPreview = () => {
+    console.log(controls);
+  };
+
   return (
     <HStack
       col={8}
@@ -27,6 +31,7 @@ function BuilderNavbar() {
         link="/home"
         iconSize="25px"
       ></NavImageLink>
+      <Button onClick={handleOpenPreview}>Click</Button>
     </HStack>
   );
 }
