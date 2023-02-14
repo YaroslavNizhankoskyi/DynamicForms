@@ -4,7 +4,7 @@ import Controls from "./Controls";
 import FormBuilder from "./FormBuilder";
 import BuilderNavbar from "./BuilderNavbar";
 import { DragDropContext } from "@hello-pangea/dnd";
-import controlIcons from "variables/controls";
+import controlsData from "variables/controls";
 import { setupDefaultValidation } from "common/builder/validation/yupSchemaCreator";
 
 function DynamicFormsBuilder() {
@@ -12,14 +12,17 @@ function DynamicFormsBuilder() {
 
   const handleOnDragEnd = (result) => {
     let items = [...controls];
-    let controlIconData = controlIcons.find(
-      (el) => el.type == result.draggableId
-    );
+    let controlData = controlsData.find((el) => el.type == result.draggableId);
 
     let control = {
       id: Date.now(),
-      settings: {},
-      ...controlIconData,
+      ...controlData,
+      inputConfig: {
+        ...controlData.inputConfig,
+      },
+      validation: {
+        ...controlData.validation,
+      },
     };
 
     setupDefaultValidation(control);
