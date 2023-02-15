@@ -1,12 +1,26 @@
-import { HStack, Button } from "@chakra-ui/react";
+import { HStack, Button, Box } from "@chakra-ui/react";
 import NavImageLink from "components/Sidebar/NavImageLink";
 import React from "react";
 import { CreativeTimLogo } from "components/Icons/Icons";
 import { FaRegEye } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUserForms, resetUserForms } from "common/redux/stores/userForms";
 
 function BuilderNavbar({ controls }) {
+  const { formId } = useParams();
+  const dispatch = useDispatch();
+
   const handleOpenPreview = () => {
-    console.log(controls);
+    dispatch(resetUserForms());
+
+    const serializableControls = controls.map((el) => {
+      return { ...el, icon: undefined, component: undefined };
+    });
+
+    const form = { id: formId, controls: serializableControls };
+
+    dispatch(addUserForms(form));
   };
 
   return (
@@ -25,13 +39,14 @@ function BuilderNavbar({ controls }) {
         logo={CreativeTimLogo}
         link="/home"
       ></NavImageLink>
-      <NavImageLink
-        logoText={"Preview Form"}
-        logo={FaRegEye}
-        link="/home"
-        iconSize="25px"
-      ></NavImageLink>
-      <Button onClick={handleOpenPreview}>Click</Button>
+      <Box onClick={handleOpenPreview}>
+        <NavImageLink
+          logoText={"Preview Form"}
+          logo={FaRegEye}
+          link={`/${formId}/preview`}
+          iconSize="25px"
+        ></NavImageLink>
+      </Box>
     </HStack>
   );
 }

@@ -22,6 +22,7 @@ import {
 import Home from "layouts/Home";
 import Guards from "common/models/Guards";
 import DynamicFormsBuilder from "views/Builder";
+import Preview from "views/Preview";
 
 export const routes = [
   {
@@ -93,10 +94,16 @@ export const routes = [
     ],
   },
   {
-    path: "/builder",
+    path: "/:formId/builder",
     name: "Form Builder",
     component: DynamicFormsBuilder,
-    guard: Guards.NONE
+    guard: Guards.NONE,
+  },
+  {
+    path: "/:formId/preview",
+    name: "Preview",
+    component: Preview,
+    guard: Guards.NONE,
   },
   {
     path: "/",
@@ -143,9 +150,9 @@ export const sidebar = [
         name: "Form Builder",
         component: DynamicFormsBuilder,
         icon: <MdDynamicForm />,
-        guard: Guards.NONE
+        guard: Guards.NONE,
       },
-    ]
+    ],
   },
   {
     category: "Account",

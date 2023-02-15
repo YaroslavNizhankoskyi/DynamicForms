@@ -13,8 +13,11 @@ import {
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { MdDynamicForm, MdOutlineShortcut } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 function HomeHeaderNav() {
+  const newFormId = uuidv4();
+
   return (
     <Grid
       templateRows="repeat(2, 1fr)"
@@ -46,7 +49,11 @@ function HomeHeaderNav() {
               <Text size={"xs"} textAlign={"center"}>
                 Start building forms now!
               </Text>
-              <Link textAlign={"center"} as={NavLink} to="/builder">
+              <Link
+                textAlign={"center"}
+                as={NavLink}
+                to={`/${newFormId}/builder`}
+              >
                 <Button
                   leftIcon={<MdDynamicForm />}
                   variant="outline"
