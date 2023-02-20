@@ -33,6 +33,4 @@ export function setupDefaultValidation(control) {
   const validatorsData = getValidatorsData(control.validation.usedValidators);
 
   control.validation.validatorsData = validatorsData;
-
-  buildControlSchema(control);
 }

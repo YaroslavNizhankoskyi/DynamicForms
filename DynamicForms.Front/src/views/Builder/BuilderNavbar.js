@@ -6,6 +6,7 @@ import { FaRegEye } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUserForms, resetUserForms } from "common/redux/stores/userForms";
+import GenericNavbar from "components/Navbars/GenericNavbar";
 
 function BuilderNavbar({ controls }) {
   const { formId } = useParams();
@@ -24,16 +25,7 @@ function BuilderNavbar({ controls }) {
   };
 
   return (
-    <HStack
-      col={8}
-      spacing={10}
-      justifyContent={"left"}
-      alignItems={"center"}
-      mx="auto"
-      display="flex"
-      w="100%"
-      px="20px"
-    >
+    <GenericNavbar gap={"20px"}>
       <NavImageLink
         logoText={"Home"}
         logo={CreativeTimLogo}
@@ -47,7 +39,7 @@ function BuilderNavbar({ controls }) {
           iconSize="25px"
         ></NavImageLink>
       </Box>
-    </HStack>
+    </GenericNavbar>
   );
 }
 

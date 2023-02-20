@@ -32,15 +32,7 @@ function DynamicFormsBuilder() {
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Box
-        h={"100px"}
-        w="100%"
-        bg={"whiteAlpha.800"}
-        rounded={"md"}
-        display={"flex"}
-      >
-        <BuilderNavbar controls={controls} />
-      </Box>
+      <BuilderNavbar controls={controls} />
       <Grid
         bg={"blackAlpha.200"}
         p={"10px"}
