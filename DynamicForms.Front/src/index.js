@@ -25,8 +25,9 @@ import { ChakraProvider } from "@chakra-ui/react";
 import "react-notifications/lib/notifications.css";
 import { NotificationContainer } from "react-notifications";
 import { addCustomYupValidators } from "common/builder/validation/addCustomYupValidators";
-import { store } from "common/redux/store";
+import { store, persistor } from "common/redux/store";
 import { Provider as ReduxProvider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
@@ -35,11 +36,13 @@ addCustomYupValidators();
 
 root.render(
   <ReduxProvider store={store}>
-    <ChakraProvider theme={theme} resetCss={false}>
-      <NotificationContainer />
-      <BrowserRouter>
-        <Switch>{getRoutesFor(routes, "index")}</Switch>
-      </BrowserRouter>
-    </ChakraProvider>
+    <PersistGate loading={null} persistor={persistor}>
+      <ChakraProvider theme={theme} resetCss={false}>
+        <NotificationContainer />
+        <BrowserRouter>
+          <Switch>{getRoutesFor(routes, "index")}</Switch>
+        </BrowserRouter>
+      </ChakraProvider>
+    </PersistGate>
   </ReduxProvider>
 );
