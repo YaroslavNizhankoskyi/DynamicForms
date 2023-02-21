@@ -1,10 +1,14 @@
 import { Input, InputGroup } from "@chakra-ui/react";
 import React from "react";
 
-function TextInput({ control }) {
+function TextInput({ control, formik }) {
   return (
     <InputGroup>
-      <Input {...control.inputConfig} />
+      <Input
+        {...control.inputConfig}
+        onChange={formik?.handleChange}
+        name={control.id}
+      />
     </InputGroup>
   );
 }

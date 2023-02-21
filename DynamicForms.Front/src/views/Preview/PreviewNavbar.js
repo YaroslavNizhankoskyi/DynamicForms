@@ -1,12 +1,11 @@
 import React from "react";
-import { Grid, GridItem, HStack, Box, Flex, Icon } from "@chakra-ui/react";
+import { Grid, Box, Flex, Icon } from "@chakra-ui/react";
 import GenericNavbar from "components/Navbars/GenericNavbar";
 import NavImageLink from "components/Sidebar/NavImageLink";
 import {
   FaArrowLeft,
   FaDesktop,
   FaMobileAlt,
-  FaRegEye,
   FaTabletAlt,
 } from "react-icons/fa";
 
@@ -28,11 +27,9 @@ function PreviewNavbar({ formId, display, setDisplay }) {
         </Box>
         <Flex gap={2} justifyContent={"space-around"}>
           <Icon
-            borderColor={"blackAlpha.200"}
             as={FaDesktop}
             boxSize={"40px"}
-            borderBottom={"2px"}
-            sx={getColor("Desktop")}
+            color={getColor("Desktop")}
             onClick={() => setDisplay("Desktop")}
           />
           <Icon

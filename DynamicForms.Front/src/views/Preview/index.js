@@ -1,20 +1,24 @@
-import GenericNavbar from "components/Navbars/GenericNavbar";
-import NavImageLink from "components/Sidebar/NavImageLink";
-import React, { useState } from "react";
+import React, { useState, createElement } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { FaRegEye } from "react-icons/fa";
-import { Box, Grid, GridItem, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, VStack } from "@chakra-ui/react";
 import FormViewVariant from "./FormViewVariant";
 import PreviewNavbar from "./PreviewNavbar";
+import ControlPreviewList from "./ControlPreviewList";
 
 function Preview() {
   const [displayType, setDisplayType] = useState("Desktop");
-
+  const [form, setForm] = useState(null);
   const { formId } = useParams();
-  const form = useSelector((state) =>
-    state.userForms.forms.find((el) => el.id == formId)
-  );
+
+  if (!form) {
+    console.log("get form");
+    let stateForm = useSelector((state) =>
+      state.userForms.forms.find((el) => el.id == formId)
+    );
+
+    setForm(stateForm);
+  }
 
   const renderDisplayView = () => {
     let width = "90%";
@@ -28,10 +32,12 @@ function Preview() {
       default:
         width = "90%";
     }
-    return <FormViewVariant width={width}></FormViewVariant>;
+    return (
+      <FormViewVariant width={width}>
+        {form ? <ControlPreviewList controls={form.controls} /> : <></>}
+      </FormViewVariant>
+    );
   };
-
-  const renderForm = () => {};
 
   return (
     <Box>

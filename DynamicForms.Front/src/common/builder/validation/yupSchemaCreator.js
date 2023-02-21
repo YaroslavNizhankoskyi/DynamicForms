@@ -1,9 +1,10 @@
 import * as yup from "yup";
 import getValidatorsData from "./getControlValidators";
 
-export function buildControlSchema(control) {
+export function buildControlSchema(schema, control) {
   const {
     validation: { validatorsData, validationType },
+    id,
   } = control;
 
   if (!validatorsData) {
@@ -26,7 +27,8 @@ export function buildControlSchema(control) {
     validator = validator[type](...params, error);
   });
 
-  control.validation.schema = validator;
+  schema[id] = validator;
+  return schema;
 }
 
 export function setupDefaultValidation(control) {

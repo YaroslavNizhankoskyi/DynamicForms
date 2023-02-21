@@ -13,8 +13,6 @@ function BuilderNavbar({ controls }) {
   const dispatch = useDispatch();
 
   const handleOpenPreview = () => {
-    dispatch(resetUserForms());
-
     const serializableControls = controls.map((el) => {
       return { ...el, icon: undefined, component: undefined };
     });
