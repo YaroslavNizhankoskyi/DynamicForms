@@ -8,17 +8,11 @@ import ControlPreviewList from "./ControlPreviewList";
 
 function Preview() {
   const [displayType, setDisplayType] = useState("Desktop");
-  const [form, setForm] = useState(null);
   const { formId } = useParams();
 
-  if (!form) {
-    console.log("get form");
-    let stateForm = useSelector((state) =>
-      state.userForms.forms.find((el) => el.id == formId)
-    );
-
-    setForm(stateForm);
-  }
+  let form = useSelector((state) =>
+    state.userForms.forms.find((el) => el.id == formId)
+  );
 
   const renderDisplayView = () => {
     let width = "90%";
