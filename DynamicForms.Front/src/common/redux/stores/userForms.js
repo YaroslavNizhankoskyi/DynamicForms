@@ -16,11 +16,21 @@ export const userForms = createSlice({
         state.forms.push(action.payload);
       }
     },
+    updateUserForm: (state, action) => {
+      state.forms = state.forms.map((el) => {
+        if (el.id == action.payload.id) {
+          return action.payload;
+        }
+
+        return el;
+      });
+    },
     resetUserForms: (state, action) => {
       return initialState;
     },
   },
 });
 
-export const { addUserForms, resetUserForms } = userForms.actions;
+export const { addUserForms, resetUserForms, updateUserForm } =
+  userForms.actions;
 export default userForms.reducer;

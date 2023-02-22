@@ -11,6 +11,7 @@ import * as yup from "yup";
 import controlsData from "variables/controls";
 
 function ControlPreviewList({ controls }) {
+  console.log(controls);
   const [validationSchema, setValidationSchema] = useState(null);
 
   let initialValues = controls.reduce((init, el) => {
@@ -52,7 +53,7 @@ function ControlPreviewList({ controls }) {
       {controls.map((el) => {
         return (
           <ChakraControl {...el.inputConfig} key={el.id}>
-            <FormLabel>{el.id}</FormLabel>
+            <FormLabel>{el.name}</FormLabel>
             {getControl(el)}
           </ChakraControl>
         );

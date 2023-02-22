@@ -5,21 +5,30 @@ import { CreativeTimLogo } from "components/Icons/Icons";
 import { FaRegEye } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addUserForms, resetUserForms } from "common/redux/stores/userForms";
 import GenericNavbar from "components/Navbars/GenericNavbar";
+import { useSelector } from "react-redux";
+import { updateUserForm, addUserForms } from "common/redux/stores/userForms";
 
-function BuilderNavbar({ controls }) {
+function BuilderNavbar({ form }) {
   const { formId } = useParams();
   const dispatch = useDispatch();
 
+  let existingForm = useSelector((state) =>
+    state.userForms.forms.find((el) => el.id == formId)
+  );
+
   const handleOpenPreview = () => {
-    const serializableControls = controls.map((el) => {
+    const serializableControls = form.controls.map((el) => {
       return { ...el, icon: undefined, component: undefined };
     });
 
-    const form = { id: formId, controls: serializableControls };
+    const formCopy = { id: formId, controls: serializableControls };
 
-    dispatch(addUserForms(form));
+    if (existingForm) {
+      dispatch(updateUserForm(formCopy));
+    } else {
+      dispatch(addUserForms(formCopy));
+    }
   };
 
   return (
