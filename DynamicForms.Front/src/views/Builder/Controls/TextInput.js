@@ -8,6 +8,7 @@ function TextInput({ control, formik }) {
         {...control.inputConfig}
         onChange={formik?.handleChange}
         name={control.id}
+        onBlur={formik?.handleBlur}
       />
     </InputGroup>
   );

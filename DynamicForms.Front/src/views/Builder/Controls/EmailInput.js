@@ -6,6 +6,7 @@ function EmailInput({ control, formik }) {
     <Input
       {...control.inputConfig}
       onChange={formik?.handleChange}
+      onBlur={formik?.handleBlur}
       name={control.id}
       type="email"
     ></Input>

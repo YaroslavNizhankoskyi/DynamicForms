@@ -10,7 +10,11 @@ import React from "react";
 function NumberInput({ control, formik }) {
   return (
     <ChakraNumberInput allowMouseWheel {...control.inputConfig}>
-      <NumberInputField onChange={formik?.handleChange} name={control.id} />
+      <NumberInputField
+        onChange={formik?.handleChange}
+        onBlur={formik?.handleBlur}
+        name={control.id}
+      />
       <NumberInputStepper>
         <NumberIncrementStepper />
         <NumberDecrementStepper />

@@ -1,23 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 
-const initialState = {
-  forms: [],
-};
+const initialState = [];
 
 export const userForms = createSlice({
   name: "userForms",
   initialState,
   reducers: {
     addUserForms: (state, action) => {
-      const form = state.forms.find((el) => el.id == action.payload.id);
+      const form = state.find((el) => el.id == action.payload.id);
 
       if (!form) {
-        state.forms.push(action.payload);
+        state.push(action.payload);
       }
     },
     updateUserForm: (state, action) => {
-      state.forms = state.forms.map((el) => {
+      return state.map((el) => {
         if (el.id == action.payload.id) {
           return action.payload;
         }

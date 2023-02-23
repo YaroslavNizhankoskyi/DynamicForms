@@ -4,30 +4,28 @@ import {
   FormLabel,
   Button,
 } from "@chakra-ui/react";
-import React, { createElement, useState } from "react";
+import React, { createElement, useEffect, useMemo, useState } from "react";
 import { useFormik } from "formik";
 import { buildControlSchema } from "common/builder/validation/yupSchemaCreator";
 import * as yup from "yup";
 import controlsData from "variables/controls";
 
 function ControlPreviewList({ controls }) {
-  console.log(controls);
-  const [validationSchema, setValidationSchema] = useState(null);
+  const memoizedFormConfig = useMemo(() => {
+    let initialValues = controls.reduce((init, el) => {
+      const id = el.id;
+      return { ...init, [id]: "" };
+    }, {});
 
-  let initialValues = controls.reduce((init, el) => {
-    const id = el.id;
-    return { ...init, [id]: "" };
-  }, {});
-
-  if (!validationSchema) {
     const yupSchema = controls.reduce(buildControlSchema, {});
-    const validation = yup.object().shape(yupSchema);
-    setValidationSchema(validation);
-  }
+    const validationSchema = yup.object().shape(yupSchema);
+
+    return { initialValues, validationSchema };
+  }, controls);
 
   const formik = useFormik({
-    initialValues,
-    validationSchema,
+    initialValues: memoizedFormConfig.initialValues,
+    validationSchema: memoizedFormConfig.validationSchema,
     onSubmit: (values) => console.log(values),
   });
 
@@ -47,6 +45,9 @@ function ControlPreviewList({ controls }) {
       </>
     );
   };
+
+  console.log(formik.touched);
+  console.log(formik.errors);
 
   return (
     <VStack p={"10"}>

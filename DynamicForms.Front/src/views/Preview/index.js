@@ -11,7 +11,7 @@ function Preview() {
   const { formId } = useParams();
 
   let form = useSelector((state) =>
-    state.userForms.forms.find((el) => el.id == formId)
+    state.userForms.find((el) => el.id == formId)
   );
 
   const renderDisplayView = () => {

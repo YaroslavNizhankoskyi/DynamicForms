@@ -13,9 +13,10 @@ function DynamicFormsBuilder() {
   const { formId } = useParams();
   let [form, setForm] = useState({ id: formId, controls: [] });
 
-  let existingForm = useSelector((state) =>
-    state.userForms.forms.find((el) => el.id == formId)
-  );
+  let existingForm = useSelector((state) => {
+    console.log(state.userForms);
+    return state.userForms.find((el) => el.id == formId);
+  });
 
   useEffect(() => {
     if (existingForm) {

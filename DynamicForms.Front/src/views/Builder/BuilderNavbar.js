@@ -14,7 +14,7 @@ function BuilderNavbar({ form }) {
   const dispatch = useDispatch();
 
   let existingForm = useSelector((state) =>
-    state.userForms.forms.find((el) => el.id == formId)
+    state.userForms.find((el) => el.id == formId)
   );
 
   const handleOpenPreview = () => {
