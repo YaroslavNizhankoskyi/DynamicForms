@@ -17,8 +17,28 @@ function DynamicFormsBuilder() {
     console.log(state.userForms);
     return state.userForms.find((el) => el.id == formId);
   });
-
+  ``;
   useEffect(() => {
+    refillFormDataIfExists();
+  }, []);
+
+  const handleOnDragEnd = (result) => {
+    if (
+      result.destination.droppableId == "formBuilder" &&
+      result.source.droppableId == "formBuilder"
+    ) {
+      moveFormControl(result);
+    }
+
+    if (
+      result.destination.droppableId == "formBuilder" &&
+      result.source.droppableId == "controls"
+    ) {
+      addControlToForm(result);
+    }
+  };
+
+  const refillFormDataIfExists = () => {
     if (existingForm) {
       existingForm = structuredClone(existingForm);
 
@@ -37,11 +57,21 @@ function DynamicFormsBuilder() {
 
       setForm(existingForm);
     }
-  }, []);
+  };
 
-  const handleOnDragEnd = (result) => {
+  const moveFormControl = (moveResult) => {
+    const formControls = [...form.controls];
+    const [reorderedItem] = formControls.splice(moveResult.source.index, 1);
+    formControls.splice(moveResult.destination.index, 0, reorderedItem);
+
+    setFormControls(formControls);
+  };
+
+  const addControlToForm = (addResult) => {
     const formCopy = { ...form, controls: [...form.controls] };
-    let controlData = controlsData.find((el) => el.type == result.draggableId);
+    let controlData = controlsData.find(
+      (el) => el.type == addResult.draggableId
+    );
 
     let control = {
       id: Date.now(),

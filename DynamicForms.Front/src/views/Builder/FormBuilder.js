@@ -1,5 +1,5 @@
 import { Box, Text, Divider, Stack } from "@chakra-ui/react";
-import { Droppable } from "@hello-pangea/dnd";
+import { Draggable, Droppable } from "@hello-pangea/dnd";
 import React from "react";
 import FormControl from "./controls/FormControl";
 import controls from "variables/controls";
@@ -54,11 +54,26 @@ function FormBuilder({ controls, setControls }) {
                 <Stack direction={"column"} w="100%">
                   {controls.map((el, idx) => {
                     return (
-                      <FormControl
-                        control={el}
-                        key={el.id}
-                        onDelete={onDeleteControl}
-                      />
+                      <Draggable
+                        draggableId={idx.toString()}
+                        index={idx}
+                        key={idx}
+                      >
+                        {(provided) => {
+                          return (
+                            <div
+                              {...provided.draggableProps}
+                              ref={provided.innerRef}
+                              {...provided.dragHandleProps}
+                            >
+                              <FormControl
+                                control={el}
+                                onDelete={onDeleteControl}
+                              />
+                            </div>
+                          );
+                        }}
+                      </Draggable>
                     );
                   })}
                   {provided.placeholder}
