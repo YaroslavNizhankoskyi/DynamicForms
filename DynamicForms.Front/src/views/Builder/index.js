@@ -8,18 +8,21 @@ import controlsData from "variables/controls";
 import { setupDefaultValidation } from "common/builder/validation/yupSchemaCreator";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useFormik } from "formik";
+import { getControlsInitialValues } from "common/helpers/formikHelpers";
 
 function DynamicFormsBuilder() {
   const { formId } = useParams();
-  let [form, setForm] = useState({ id: formId, controls: [] });
+  const [form, setForm] = useState({ id: formId, controls: [] });
+  const [initialValues, setInitialValues] = useState({});
 
-  let existingForm = useSelector((state) => {
-    console.log(state.userForms);
-    return state.userForms.find((el) => el.id == formId);
-  });
-  ``;
+  let existingForm = useSelector((state) =>
+    state.userForms.find((el) => el.id == formId)
+  );
+
   useEffect(() => {
     refillFormDataIfExists();
+    setInitialValues(getControlsInitialValues(form.controls));
   }, []);
 
   const handleOnDragEnd = (result) => {
@@ -87,12 +90,23 @@ function DynamicFormsBuilder() {
     setupDefaultValidation(control);
     formCopy.controls.push(control);
     setForm(formCopy);
+    setInitialValues({ ...initialValues, [control.id]: "" });
   };
 
   const setFormControls = (controls) => {
     const formCopy = { ...form, controls: [...controls] };
     setForm(formCopy);
   };
+
+  const formik = useFormik({
+    initialValues,
+    enableReinitialize: true,
+    onSubmit: () => {},
+  });
+
+  useEffect(() => {
+    setInitialValues(formik.values);
+  }, [JSON.stringify(formik.values)]);
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -109,7 +123,11 @@ function DynamicFormsBuilder() {
           <Controls />
         </GridItem>
         <GridItem rowSpan={7} colSpan={5} bg={"gray.500"} rounded={"md"}>
-          <FormBuilder controls={form.controls} setControls={setFormControls} />
+          <FormBuilder
+            controls={form.controls}
+            setControls={setFormControls}
+            formik={formik}
+          />
         </GridItem>
       </Grid>
     </DragDropContext>

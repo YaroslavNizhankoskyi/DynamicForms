@@ -8,6 +8,7 @@ function EmailInput({ control, formik }) {
       onChange={formik?.handleChange}
       onBlur={formik?.handleBlur}
       name={control.id}
+      value={formik.values[control.id]}
       type="email"
     ></Input>
   );

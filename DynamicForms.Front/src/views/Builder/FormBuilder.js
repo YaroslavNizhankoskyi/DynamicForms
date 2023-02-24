@@ -1,10 +1,12 @@
 import { Box, Text, Divider, Stack } from "@chakra-ui/react";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
-import React from "react";
+import React, { useState } from "react";
 import FormControl from "./controls/FormControl";
-import controls from "variables/controls";
+import { useFormik } from "formik";
+import { useEffect } from "react";
+import { useMemo } from "react";
 
-function FormBuilder({ controls, setControls }) {
+function FormBuilder({ controls, setControls, formik }) {
   const onDeleteControl = (event, id) => {
     event.preventDefault();
     let copy = [...controls];
@@ -42,7 +44,7 @@ function FormBuilder({ controls, setControls }) {
             return (
               <div
                 style={{
-                  minHeight: "80%",
+                  minHeight: "300px",
                   width: "100%",
                   backgroundColor: "gray.200",
                   display: "flex",
@@ -68,6 +70,7 @@ function FormBuilder({ controls, setControls }) {
                             >
                               <FormControl
                                 control={el}
+                                formik={formik}
                                 onDelete={onDeleteControl}
                               />
                             </div>

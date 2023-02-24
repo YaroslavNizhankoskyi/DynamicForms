@@ -14,6 +14,7 @@ function NumberInput({ control, formik }) {
         onChange={formik?.handleChange}
         onBlur={formik?.handleBlur}
         name={control.id}
+        value={formik.values[control.id]}
       />
       <NumberInputStepper>
         <NumberIncrementStepper />

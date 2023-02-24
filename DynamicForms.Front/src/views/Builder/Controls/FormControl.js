@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, createElement } from "react";
 import {
   Text,
   FormControl as ChakraControl,
@@ -12,9 +12,7 @@ import {
 import { MdSettingsApplications, MdOutlineDeleteForever } from "react-icons/md";
 import ConfigDrawer from "../drawer/ConfigDrawer";
 
-function FormControl({ control, onDelete }) {
-  const ComponentInput = control.component;
-
+function FormControl({ control, onDelete, formik }) {
   const btnRef = useRef();
   const disclosure = useDisclosure();
 
@@ -27,7 +25,7 @@ function FormControl({ control, onDelete }) {
     <HStack p="10px" onFocus={() => setIsFocused(true)} onBlur={handleOnBlur}>
       <ChakraControl {...control.inputConfig}>
         <FormLabel>{control.name}</FormLabel>
-        <ComponentInput control={control}></ComponentInput>
+        {createElement(control.component, { control, formik })}
       </ChakraControl>
       <Box w={"33px"}>
         <VStack display={isFocused ? "inherit" : "none"}>

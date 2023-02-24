@@ -6,16 +6,13 @@ import {
 } from "@chakra-ui/react";
 import React, { createElement, useEffect, useMemo, useState } from "react";
 import { useFormik } from "formik";
-import { buildControlSchema } from "common/builder/validation/yupSchemaCreator";
+import { getControlsInitialValues } from "common/helpers/formikHelpers";
 import * as yup from "yup";
 import controlsData from "variables/controls";
 
 function ControlPreviewList({ controls }) {
   const memoizedFormConfig = useMemo(() => {
-    let initialValues = controls.reduce((init, el) => {
-      const id = el.id;
-      return { ...init, [id]: "" };
-    }, {});
+    const initialValues = getControlsInitialValues(controls);
 
     const yupSchema = controls.reduce(buildControlSchema, {});
     const validationSchema = yup.object().shape(yupSchema);
