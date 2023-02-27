@@ -2,13 +2,14 @@ import {
   VStack,
   FormControl as ChakraControl,
   FormLabel,
-  Button,
+  Text,
 } from "@chakra-ui/react";
 import React, { createElement, useEffect, useMemo, useState } from "react";
 import { useFormik } from "formik";
 import { getControlsInitialValues } from "common/helpers/formikHelpers";
 import * as yup from "yup";
 import controlsData from "variables/controls";
+import { buildControlSchema } from "common/builder/validation/yupSchemaCreator";
 
 function ControlPreviewList({ controls }) {
   const memoizedFormConfig = useMemo(() => {
@@ -37,7 +38,7 @@ function ControlPreviewList({ controls }) {
       <>
         {createElement(component, { control, formik })}
         {formik.touched[control.id] && formik.errors[control.id] && (
-          <span className="text-red-400">{formik.errors[control.id]}</span>
+          <Text variant="validation">{formik.errors[control.id]}</Text>
         )}
       </>
     );

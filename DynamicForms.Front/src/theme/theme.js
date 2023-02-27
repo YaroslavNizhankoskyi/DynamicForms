@@ -14,6 +14,7 @@ import { PanelContainerComponent } from "./additions/layout/PanelContainer";
 import { textInputTheme } from "./components/input";
 import { formControlTheme } from "./components/formControl";
 import { numberInputTheme } from "./components/numberInput";
+import { textStyles } from "./components/text";
 // import { mode } from "@chakra-ui/theme-tools";
 export default extendTheme(
   { breakpoints }, // Breakpoints
@@ -22,6 +23,7 @@ export default extendTheme(
   badgeStyles, // Badge styles
   linkStyles, // Link styles
   drawerStyles, // Sidebar variant for Chakra's drawer
+  textStyles,
   CardComponent, // Card component
   CardBodyComponent, // Card Body component
   CardHeaderComponent, // Card Header component
