@@ -25,19 +25,32 @@ function DynamicFormsBuilder() {
     setInitialValues(getControlsInitialValues(form.controls));
   }, []);
 
+  const formik = useFormik({
+    initialValues,
+    enableReinitialize: true,
+    onSubmit: () => {},
+  });
+
+  useEffect(() => {
+    setInitialValues(formik.values);
+  }, [JSON.stringify(formik.values)]);
+
   const handleOnDragEnd = (result) => {
-    if (
-      result.destination.droppableId == "formBuilder" &&
-      result.source.droppableId == "formBuilder"
-    ) {
-      moveFormControl(result);
+    const { source, destination } = result;
+
+    if (!destination) {
+      return;
     }
 
-    if (
-      result.destination.droppableId == "formBuilder" &&
-      result.source.droppableId == "controls"
-    ) {
-      addControlToForm(result);
+    switch (source.droppableId) {
+      case destination.droppableId:
+        reorder(result);
+        break;
+      case "controls":
+        add(result);
+        break;
+      default:
+        return;
     }
   };
 
@@ -62,16 +75,14 @@ function DynamicFormsBuilder() {
     }
   };
 
-  const moveFormControl = (moveResult) => {
-    const formControls = [...form.controls];
-    const [reorderedItem] = formControls.splice(moveResult.source.index, 1);
-    formControls.splice(moveResult.destination.index, 0, reorderedItem);
+  const reorder = (moveResult) => {
+    const [reorderedItem] = form.controls.splice(moveResult.source.index, 1);
+    form.controls.splice(moveResult.destination.index, 0, reorderedItem);
 
-    setFormControls(formControls);
+    setFormControls(form.controls);
   };
 
-  const addControlToForm = (addResult) => {
-    const formCopy = { ...form, controls: [...form.controls] };
+  const add = (addResult) => {
     let controlData = controlsData.find(
       (el) => el.type == addResult.draggableId
     );
@@ -88,8 +99,8 @@ function DynamicFormsBuilder() {
     };
 
     setupDefaultValidation(control);
-    formCopy.controls.push(control);
-    setForm(formCopy);
+    form.controls.splice(addResult.destination.index, 0, control);
+    setFormControls(form.controls);
     setInitialValues({ ...initialValues, [control.id]: "" });
   };
 
@@ -97,16 +108,6 @@ function DynamicFormsBuilder() {
     const formCopy = { ...form, controls: [...controls] };
     setForm(formCopy);
   };
-
-  const formik = useFormik({
-    initialValues,
-    enableReinitialize: true,
-    onSubmit: () => {},
-  });
-
-  useEffect(() => {
-    setInitialValues(formik.values);
-  }, [JSON.stringify(formik.values)]);
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>

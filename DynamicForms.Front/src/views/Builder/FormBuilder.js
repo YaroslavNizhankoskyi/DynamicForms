@@ -40,7 +40,7 @@ function FormBuilder({ controls, setControls, formik }) {
         rounded={"sm"}
       >
         <Droppable droppableId="formBuilder">
-          {(provided) => {
+          {(provided, snapshot) => {
             return (
               <div
                 style={{
@@ -53,7 +53,11 @@ function FormBuilder({ controls, setControls, formik }) {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
-                <Stack direction={"column"} w="100%">
+                <Stack
+                  direction={"column"}
+                  w="100%"
+                  opacity={snapshot.isDraggingOver ? "70%" : "100%"}
+                >
                   {controls.map((el, idx) => {
                     return (
                       <Draggable

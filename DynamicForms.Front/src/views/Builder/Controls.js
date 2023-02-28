@@ -2,12 +2,12 @@ import { Box, Divider, SimpleGrid, Text, Stack } from "@chakra-ui/react";
 import React from "react";
 import ControlIcon from "./controls/ControlIcon";
 import controls from "variables/controls";
-import { DragDropContext, Droppable } from "@hello-pangea/dnd";
+import { Droppable, Draggable } from "@hello-pangea/dnd";
 
 function Controls() {
   return (
-    <Droppable droppableId="controls">
-      {(provided) => {
+    <Droppable droppableId="controls" isDropDisabled={true}>
+      {(provided, snapshot) => {
         return (
           <div {...provided.droppableProps} ref={provided.innerRef}>
             <Stack
@@ -27,7 +27,29 @@ function Controls() {
               </Box>
               <Divider borderTop={"1px solid #a1a1a1"}></Divider>
               {controls.map((el, idx) => (
-                <ControlIcon key={el.type} index={idx} control={el} />
+                <Draggable draggableId={el.type} index={idx}>
+                  {(provided, snapshot) => {
+                    return (
+                      <>
+                        <div
+                          {...provided.draggableProps}
+                          ref={provided.innerRef}
+                          {...provided.dragHandleProps}
+                        >
+                          <ControlIcon
+                            key={el.type}
+                            index={idx}
+                            control={el}
+                            isDragging={snapshot.isDragging}
+                          />
+                        </div>
+                        {snapshot.isDragging && (
+                          <ControlIcon key={el.type} index={idx} control={el} />
+                        )}
+                      </>
+                    );
+                  }}
+                </Draggable>
               ))}
               {provided.placeholder}
             </Stack>
