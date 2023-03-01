@@ -13,7 +13,18 @@ import { getControlsInitialValues } from "common/helpers/formikHelpers";
 
 function DynamicFormsBuilder() {
   const { formId } = useParams();
-  const [form, setForm] = useState({ id: formId, controls: [] });
+
+  const initialForm = {
+    id: formId,
+    controls: [],
+    name: "unset",
+    domain: "unset",
+    created: new Date(),
+    modified: new Date(),
+    status: "unsaved",
+  };
+
+  const [form, setForm] = useState(initialForm);
   const [initialValues, setInitialValues] = useState({});
 
   let existingForm = useSelector((state) =>

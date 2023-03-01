@@ -2,9 +2,6 @@ import { Box, Text, Divider, Stack } from "@chakra-ui/react";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
 import React, { useState } from "react";
 import FormControl from "./controls/FormControl";
-import { useFormik } from "formik";
-import { useEffect } from "react";
-import { useMemo } from "react";
 
 function FormBuilder({ controls, setControls, formik }) {
   const onDeleteControl = (event, id) => {

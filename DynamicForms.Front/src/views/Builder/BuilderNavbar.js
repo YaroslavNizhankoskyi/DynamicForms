@@ -10,11 +10,9 @@ import { useSelector } from "react-redux";
 import { updateUserForm, addUserForms } from "common/redux/stores/userForms";
 
 function BuilderNavbar({ form }) {
-  const { formId } = useParams();
   const dispatch = useDispatch();
-
   let existingForm = useSelector((state) =>
-    state.userForms.find((el) => el.id == formId)
+    state.userForms.find((el) => el.id == form.id)
   );
 
   const handleOpenPreview = () => {
@@ -22,7 +20,7 @@ function BuilderNavbar({ form }) {
       return { ...el, icon: undefined, component: undefined };
     });
 
-    const formCopy = { id: formId, controls: serializableControls };
+    const formCopy = { ...form, controls: serializableControls };
 
     if (existingForm) {
       dispatch(updateUserForm(formCopy));
@@ -42,7 +40,7 @@ function BuilderNavbar({ form }) {
         <NavImageLink
           logoText={"Preview Form"}
           logo={FaRegEye}
-          link={`/${formId}/preview`}
+          link={`/${form.id}/preview`}
           iconSize="25px"
         ></NavImageLink>
       </Box>

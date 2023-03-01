@@ -44,9 +44,6 @@ function ControlPreviewList({ controls }) {
     );
   };
 
-  console.log(formik.touched);
-  console.log(formik.errors);
-
   return (
     <VStack p={"10"}>
       {controls.map((el) => {

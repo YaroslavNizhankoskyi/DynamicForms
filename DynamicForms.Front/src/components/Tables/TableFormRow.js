@@ -1,8 +1,8 @@
 import {
-  Avatar,
   Badge,
   Button,
   Flex,
+  Icon,
   Td,
   Text,
   Tr,
@@ -10,17 +10,22 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-function TablesTableRow(props) {
-  const { logo, name, email, subdomain, domain, status, date } = props;
+function TableFormRow(props) {
+  const { logo, name, id, domain, status, created, modified } = props;
   const textColor = useColorModeValue("gray.700", "white");
   const bgStatus = useColorModeValue("gray.400", "#1a202c");
   const colorStatus = useColorModeValue("white", "gray.400");
-
   return (
     <Tr>
       <Td minWidth={{ sm: "250px" }} pl="0px">
         <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-          <Avatar src={logo} w="50px" borderRadius="12px" me="18px" />
+          <Icon
+            as={logo}
+            borderRadius="12px"
+            color="blue.300"
+            me="18px"
+            boxSize={"35px"}
+          />
           <Flex direction="column">
             <Text
               fontSize="md"
@@ -30,9 +35,6 @@ function TablesTableRow(props) {
             >
               {name}
             </Text>
-            <Text fontSize="sm" color="gray.400" fontWeight="normal">
-              {email}
-            </Text>
           </Flex>
         </Flex>
       </Td>
@@ -41,9 +43,6 @@ function TablesTableRow(props) {
         <Flex direction="column">
           <Text fontSize="md" color={textColor} fontWeight="bold">
             {domain}
-          </Text>
-          <Text fontSize="sm" color="gray.400" fontWeight="normal">
-            {subdomain}
           </Text>
         </Flex>
       </Td>
@@ -60,23 +59,12 @@ function TablesTableRow(props) {
       </Td>
       <Td>
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {date}
+          {created}
         </Text>
       </Td>
-      <Td>
-        <Button p="0px" bg="transparent" variant="no-hover">
-          <Text
-            fontSize="md"
-            color="gray.400"
-            fontWeight="bold"
-            cursor="pointer"
-          >
-            Edit
-          </Text>
-        </Button>
-      </Td>
+      <Td>{props.children}</Td>
     </Tr>
   );
 }
 
-export default TablesTableRow;
+export default TableFormRow;

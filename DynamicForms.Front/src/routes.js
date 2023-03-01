@@ -1,6 +1,5 @@
 // import
 import Dashboard from "views/Dashboard/Dashboard";
-import Tables from "views/Dashboard/Tables";
 import Billing from "views/Dashboard/Billing";
 import Profile from "views/Dashboard/Profile";
 import SignIn from "views/Auth/SignIn.js";
@@ -23,6 +22,7 @@ import Home from "layouts/Home";
 import Guards from "common/models/Guards";
 import DynamicFormsBuilder from "views/Builder";
 import Preview from "views/Preview";
+import Forms from "views/Dashboard/Tables";
 
 export const routes = [
   {
@@ -39,10 +39,10 @@ export const routes = [
         guard: Guards.NONE,
       },
       {
-        path: "/admin/tables",
-        name: "Tables",
+        path: "/admin/forms",
+        name: "Forms",
         icon: <StatsIcon color="inherit" />,
-        component: Tables,
+        component: Forms,
         guard: Guards.NONE,
       },
       {
@@ -126,10 +126,10 @@ export const sidebar = [
         guard: Guards.NONE,
       },
       {
-        path: "/admin/tables",
-        name: "Tables",
+        path: "/admin/forms",
+        name: "Forms",
         icon: <StatsIcon color="inherit" />,
-        component: Tables,
+        component: Forms,
         guard: Guards.NONE,
       },
       {
