@@ -1,6 +1,5 @@
 import {
   Badge,
-  Button,
   Flex,
   Icon,
   Td,
@@ -10,15 +9,15 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-function TableFormRow(props) {
-  const { logo, name, id, domain, status, created, modified } = props;
+function RecentFormsRow(props) {
+  const { logo, name, status, modified } = props;
   const textColor = useColorModeValue("gray.700", "white");
   const bgStatus = useColorModeValue("gray.400", "#1a202c");
   const colorStatus = useColorModeValue("white", "gray.400");
   return (
     <Tr>
       <Td minWidth={{ sm: "250px" }} pl="0px">
-        <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
+        <Flex align="center" py="5px" minWidth="100%" flexWrap="nowrap">
           <Icon
             as={logo}
             borderRadius="12px"
@@ -38,14 +37,6 @@ function TableFormRow(props) {
           </Flex>
         </Flex>
       </Td>
-
-      <Td>
-        <Flex direction="column">
-          <Text fontSize="md" color={textColor} fontWeight="bold">
-            {domain}
-          </Text>
-        </Flex>
-      </Td>
       <Td>
         <Badge
           bg={status === "Online" ? "green.400" : bgStatus}
@@ -59,11 +50,6 @@ function TableFormRow(props) {
       </Td>
       <Td>
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {created}
-        </Text>
-      </Td>
-      <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
           {modified}
         </Text>
       </Td>
@@ -72,4 +58,4 @@ function TableFormRow(props) {
   );
 }
 
-export default TableFormRow;
+export default RecentFormsRow;

@@ -1,11 +1,27 @@
-import { Flex, HStack } from "@chakra-ui/react";
+import { Flex, HStack, Select } from "@chakra-ui/react";
 import React from "react";
 
 function FormFilters({ filters, onFilterChange }) {
   return (
-    <Flex width={"100%"} shadow={"xl"} rounded="md" bg="gray.50" gap={4}>
-      <HStack>
-        <Flex width={"30%"}></Flex>
+    <Flex
+      boxShadow={"md"}
+      rounded="md"
+      bg="#fcfcfc"
+      gap={4}
+      w={"100%"}
+      p={"10px"}
+    >
+      <HStack width={"inherit"}>
+        <Flex width={"30%"}>
+          <Select
+            variant={"outline"}
+            placeholder="Filters"
+            bg="#A0AEC0"
+            color={"white"}
+            fontWeight={"bold"}
+            focusBorderColor="black"
+          />
+        </Flex>
         <Flex width={"30%"}></Flex>
         <Flex width={"30%"}></Flex>
       </HStack>

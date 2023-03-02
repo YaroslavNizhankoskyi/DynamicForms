@@ -12,14 +12,21 @@ function Forms() {
   const forms = useSelector((state) => state.userForms);
 
   return (
-    <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
-      <Flex width={"max-content"} p={"10px"} pb={"20px"}>
+    <Flex direction="column" pt={{ base: "120px", md: "75px" }} minH={"1000px"}>
+      <Flex mb="20px" right={"0px"} left={"0px"} float={"right"} minH={"100px"}>
         <FormFilters></FormFilters>
       </Flex>
-      <Flex width={"max-content"} p={"10px"}>
+      <Flex width={"auto"} p={"10px"}>
         <FormsTable
           title={"Forms Table"}
-          captions={["Name", "Domain", "Status", "Created", ""]}
+          captions={[
+            "Name",
+            "Domain",
+            "Status",
+            "Created",
+            "Modified",
+            "Actions",
+          ]}
           forms={forms}
         >
           {forms.map((form) => {
