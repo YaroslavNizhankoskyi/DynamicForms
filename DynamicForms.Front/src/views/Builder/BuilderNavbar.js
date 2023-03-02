@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import GenericNavbar from "components/Navbars/GenericNavbar";
 import { useSelector } from "react-redux";
 import { updateUserForm, addUserForms } from "common/redux/stores/userForms";
+import { MdSettings } from "react-icons/md";
 
 function BuilderNavbar({ form }) {
   const dispatch = useDispatch();
@@ -41,6 +42,14 @@ function BuilderNavbar({ form }) {
           logoText={"Preview Form"}
           logo={FaRegEye}
           link={`/${form.id}/preview`}
+          iconSize="25px"
+        ></NavImageLink>
+      </Box>
+      <Box onClick={handleOpenPreview}>
+        <NavImageLink
+          logoText={"Settings"}
+          logo={MdSettings}
+          link={`/${form.id}/settings`}
           iconSize="25px"
         ></NavImageLink>
       </Box>

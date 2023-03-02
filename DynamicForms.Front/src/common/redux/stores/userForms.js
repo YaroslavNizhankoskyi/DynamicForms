@@ -23,12 +23,18 @@ export const userForms = createSlice({
         return el;
       });
     },
+    removeUserForm: (state, action) => {
+      state.splice(
+        state.findIndex((form) => form.id === form.payload),
+        1
+      );
+    },
     resetUserForms: (state, action) => {
       return initialState;
     },
   },
 });
 
-export const { addUserForms, resetUserForms, updateUserForm } =
+export const { addUserForms, resetUserForms, updateUserForm, removeUserForm } =
   userForms.actions;
 export default userForms.reducer;

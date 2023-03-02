@@ -9,11 +9,21 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
+import { useDispatch } from "react-redux";
+import { removeUserForm } from "common/redux/stores/userForms";
+import FormTableMenu from "./Menu/FormTableMenu";
+
 function RecentFormsRow(props) {
-  const { logo, name, status, modified } = props;
+  const { logo, name, status, modified, id } = props;
   const textColor = useColorModeValue("gray.700", "white");
   const bgStatus = useColorModeValue("gray.400", "#1a202c");
   const colorStatus = useColorModeValue("white", "gray.400");
+  const dispatcher = useDispatch();
+
+  const handleDelete = () => {
+    dispatcher(removeUserForm(id));
+  };
+
   return (
     <Tr>
       <Td minWidth={{ sm: "250px" }} pl="0px">
@@ -53,7 +63,9 @@ function RecentFormsRow(props) {
           {modified}
         </Text>
       </Td>
-      <Td>{props.children}</Td>
+      <Td>
+        <FormTableMenu formId={id} handleDelete={handleDelete} />
+      </Td>
     </Tr>
   );
 }

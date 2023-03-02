@@ -9,12 +9,15 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
+import FormTableMenu from "./Menu/FormTableMenu";
+import { useDispatch } from "react-redux";
 
 function TableFormRow(props) {
   const { logo, name, id, domain, status, created, modified } = props;
   const textColor = useColorModeValue("gray.700", "white");
   const bgStatus = useColorModeValue("gray.400", "#1a202c");
   const colorStatus = useColorModeValue("white", "gray.400");
+
   return (
     <Tr>
       <Td minWidth={{ sm: "250px" }} pl="0px">
@@ -67,7 +70,9 @@ function TableFormRow(props) {
           {modified}
         </Text>
       </Td>
-      <Td>{props.children}</Td>
+      <Td>
+        <FormTableMenu formId={id} />
+      </Td>
     </Tr>
   );
 }

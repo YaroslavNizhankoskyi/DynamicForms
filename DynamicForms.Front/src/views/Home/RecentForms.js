@@ -29,18 +29,9 @@ function RecentForms() {
             logo={MdDynamicForm}
             status={form.status}
             modified={formatIsoDate(form.modified)}
-          >
-            <Button p="0px" bg="transparent" variant="no-hover">
-              <Text
-                fontSize="md"
-                color="gray.400"
-                fontWeight="bold"
-                cursor="pointer"
-              >
-                Edit
-              </Text>
-            </Button>
-          </RecentFormsRow>
+            id={form.id}
+            key={form.id}
+          />
         );
       })}
     </FormsTable>
