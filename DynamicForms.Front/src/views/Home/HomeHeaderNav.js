@@ -52,7 +52,7 @@ function HomeHeaderNav() {
               <Link
                 textAlign={"center"}
                 as={NavLink}
-                to={`/${newFormId}/builder`}
+                to={`/form/${newFormId}/builder`}
               >
                 <Button
                   leftIcon={<MdDynamicForm />}

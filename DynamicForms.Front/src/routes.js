@@ -23,6 +23,7 @@ import Guards from "common/models/Guards";
 import DynamicFormsBuilder from "views/Builder";
 import Preview from "views/Preview";
 import Forms from "views/Dashboard/Tables";
+import Form from "layouts/Form";
 
 export const routes = [
   {
@@ -94,16 +95,24 @@ export const routes = [
     ],
   },
   {
-    path: "/:formId/builder",
-    name: "Form Builder",
-    component: DynamicFormsBuilder,
+    path: "/form",
+    name: "Form",
+    component: Form,
     guard: Guards.NONE,
-  },
-  {
-    path: "/:formId/preview",
-    name: "Preview",
-    component: Preview,
-    guard: Guards.NONE,
+    children: [
+      {
+        path: "/form/:formId/builder",
+        name: "Form Builder",
+        component: DynamicFormsBuilder,
+        guard: Guards.NONE,
+      },
+      {
+        path: "/form/:formId/preview",
+        name: "Preview",
+        component: Preview,
+        guard: Guards.NONE,
+      },
+    ],
   },
   {
     path: "/",
@@ -137,19 +146,6 @@ export const sidebar = [
         name: "Billing",
         icon: <CreditIcon color="inherit" />,
         component: Billing,
-        guard: Guards.NONE,
-      },
-    ],
-  },
-  {
-    category: "Builder",
-    guard: Guards.NONE,
-    children: [
-      {
-        path: "/builder",
-        name: "Form Builder",
-        component: DynamicFormsBuilder,
-        icon: <MdDynamicForm />,
         guard: Guards.NONE,
       },
     ],

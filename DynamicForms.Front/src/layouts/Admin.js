@@ -25,8 +25,6 @@ export default function Admin(props) {
   const [fixed, setFixed] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  console.log(getRoutesFor(routes, "/auth"));
-
   return (
     <>
       <Sidebar

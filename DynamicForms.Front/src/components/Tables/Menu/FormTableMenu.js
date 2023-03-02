@@ -34,12 +34,16 @@ function FormTableMenu({ formId }) {
       <MenuList>
         <MenuItem
           as={NavLink}
-          to={`${formId}/builder`}
+          to={`/form/${formId}/builder`}
           icon={<MdOutlineModeEdit />}
         >
           Edit
         </MenuItem>
-        <MenuItem as={NavLink} to={`${formId}/preview`} icon={<FaRegEye />}>
+        <MenuItem
+          as={NavLink}
+          to={`/form/${formId}/preview`}
+          icon={<FaRegEye />}
+        >
           View
         </MenuItem>
         <MenuItem onClick={disclosure.onOpen} icon={<DeleteIcon />}>

@@ -8,7 +8,7 @@ export function isActiveNavbar() {
   return false;
 }
 
-export function getRoutesFor(routes, pathes) {
+export function getRoutesFor(routes, pathes, rest) {
   if (pathes == "index") {
     return routes.map((el) => {
       return (
@@ -17,6 +17,7 @@ export function getRoutesFor(routes, pathes) {
           path={el.path}
           component={el.component}
           key={el.name}
+          {...rest}
         />
       );
     });
@@ -39,6 +40,7 @@ export function getRoutesFor(routes, pathes) {
         path={el.path}
         component={el.component}
         key={el.name}
+        {...rest}
       />
     );
   });

@@ -11,6 +11,9 @@ import { updateUserForm, addUserForms } from "common/redux/stores/userForms";
 import { MdSettings } from "react-icons/md";
 
 function BuilderNavbar({ form }) {
+  let views = ["builder", "preview", "settings"];
+  let [selectedView] = views.filter((el) => location.pathname.includes(el));
+
   const dispatch = useDispatch();
   let existingForm = useSelector((state) =>
     state.userForms.find((el) => el.id == form.id)

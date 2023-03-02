@@ -11,24 +11,11 @@ import { useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { getControlsInitialValues } from "common/helpers/formikHelpers";
 
-function DynamicFormsBuilder() {
-  const { formId } = useParams();
-
-  const initialForm = {
-    id: formId,
-    controls: [],
-    name: "unset",
-    domain: "unset",
-    created: new Date(),
-    modified: new Date(),
-    status: "unsaved",
-  };
-
-  const [form, setForm] = useState(initialForm);
+function DynamicFormsBuilder({ form, setForm }) {
   const [initialValues, setInitialValues] = useState({});
 
   let existingForm = useSelector((state) =>
-    state.userForms.find((el) => el.id == formId)
+    state.userForms.find((el) => el.id == form.id)
   );
 
   useEffect(() => {
@@ -122,7 +109,6 @@ function DynamicFormsBuilder() {
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <BuilderNavbar form={form} />
       <Grid
         bg={"blackAlpha.200"}
         p={"10px"}
