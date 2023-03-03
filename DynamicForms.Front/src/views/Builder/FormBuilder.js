@@ -1,15 +1,38 @@
 import { Box, Text, Divider, Stack } from "@chakra-ui/react";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
+import { getControlsValues } from "common/helpers/getControlValues";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import FormControl from "./controls/FormControl";
 
-function FormBuilder({ controls, setControls, formik }) {
+function FormBuilder({ controls, setControls }) {
+  const ids = controls.map((el) => el.id);
+  const [controlValues, setControlValues] = useState(getControlsValues(ids));
+
+  useEffect(() => {
+    let updatedControlsValues = getControlsValues(ids);
+    for (let id in updatedControlsValues) {
+      if (controlValues[id] != undefined) {
+        updatedControlsValues[id] = controlValues[id];
+      }
+    }
+    setControlValues(updatedControlsValues);
+  }, [controls]);
+
   const onDeleteControl = (event, id) => {
     event.preventDefault();
     let copy = [...controls];
     const controlIndex = copy.findIndex((el) => el.id === id);
     copy.splice(controlIndex, 1);
     setControls(copy);
+  };
+
+  const handleValueChange = (name, value) => {
+    let copy = { ...controlValues };
+    if (copy[name] != undefined) {
+      copy[name] = value;
+    }
+    setControlValues(copy);
   };
 
   return (
@@ -71,8 +94,9 @@ function FormBuilder({ controls, setControls, formik }) {
                             >
                               <FormControl
                                 control={el}
-                                formik={formik}
                                 onDelete={onDeleteControl}
+                                value={controlValues[el.id]}
+                                onChange={handleValueChange}
                               />
                             </div>
                           );
