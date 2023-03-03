@@ -1,14 +1,13 @@
 import React from "react";
 import { Input } from "@chakra-ui/react";
 
-function EmailInput({ control, formik }) {
+function EmailInput({ control, value, onChange }) {
   return (
     <Input
       {...control.inputConfig}
-      onChange={formik?.handleChange}
-      onBlur={formik?.handleBlur}
+      onChange={(e) => onChange(control.id, e.target.value)}
       name={control.id}
-      value={formik.values[control.id]}
+      value={value}
       type="email"
     ></Input>
   );

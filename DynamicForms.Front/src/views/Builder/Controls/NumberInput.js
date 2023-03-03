@@ -7,17 +7,16 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-function NumberInput({ control, formik }) {
+function NumberInput({ control, value, onChange }) {
   const handleNumberChange = (value) => {
-    formik.setFieldValue(control.id, parseInt(value));
+    onChange(control.id, parseInt(value));
   };
 
   return (
     <ChakraNumberInput
-      value={formik.values[control.id]}
+      value={value}
       allowMouseWheel
       onChange={handleNumberChange}
-      onBlur={formik?.handleBlur}
       name={control.id}
       {...control.inputConfig}
     >
