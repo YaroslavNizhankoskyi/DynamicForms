@@ -1,18 +1,11 @@
 import React, { useState, createElement } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { Box, Heading, VStack } from "@chakra-ui/react";
 import FormViewVariant from "./FormViewVariant";
 import PreviewNavbar from "./PreviewNavbar";
 import ControlPreviewList from "./ControlPreviewList";
 
-function Preview() {
+function Preview({ form }) {
   const [displayType, setDisplayType] = useState("Desktop");
-  const { formId } = useParams();
-
-  let form = useSelector((state) =>
-    state.userForms.find((el) => el.id == formId)
-  );
 
   const renderDisplayView = () => {
     let width = "90%";
@@ -37,7 +30,7 @@ function Preview() {
     <Box>
       {" "}
       <PreviewNavbar
-        formId={formId}
+        formId={form.id}
         display={displayType}
         setDisplay={setDisplayType}
       />

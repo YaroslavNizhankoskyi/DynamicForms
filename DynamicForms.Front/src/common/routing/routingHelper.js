@@ -1,4 +1,5 @@
 import AuthGuard from "common/auth/guards/AuthGuard";
+import { matchPath } from "react-router-dom/cjs/react-router-dom.min";
 
 export function getActiveRoute() {
   return "admin";
@@ -23,7 +24,7 @@ export function getRoutesFor(routes, pathes, rest) {
     });
   }
 
-  let route = routes.find((el) => el.path == pathes);
+  let route = routes.find((el) => matchPath(pathes, el.path));
 
   if (!route) {
     let parentRoute = routes.find((el) => pathes.startsWith(el.path));

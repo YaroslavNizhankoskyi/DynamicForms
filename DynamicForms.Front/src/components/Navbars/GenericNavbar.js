@@ -9,6 +9,7 @@ function GenericNavbar(props) {
       bg={"whiteAlpha.800"}
       rounded={"md"}
       display={"flex"}
+      {...props}
     >
       <Box
         mx="auto"

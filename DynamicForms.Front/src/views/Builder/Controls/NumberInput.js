@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-function NumberInput({ control, value, onChange }) {
+function NumberInput({ control, value, onChange, onBlur }) {
   const handleNumberChange = (value) => {
     onChange(control.id, parseInt(value));
   };
@@ -17,6 +17,7 @@ function NumberInput({ control, value, onChange }) {
       value={value}
       allowMouseWheel
       onChange={handleNumberChange}
+      onBlur={onBlur ?? (() => {})}
       name={control.id}
       {...control.inputConfig}
     >

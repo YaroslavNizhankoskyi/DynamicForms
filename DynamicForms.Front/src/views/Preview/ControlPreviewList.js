@@ -12,7 +12,7 @@ import controlsData from "variables/controls";
 import { buildControlSchema } from "common/builder/validation/yupSchemaCreator";
 
 function ControlPreviewList({ controls }) {
-  const memoizedFormConfig = useMemo(() => {
+  const { initialValues, validationSchema } = useMemo(() => {
     const initialValues = getControlsValues(controls.map((el) => el.id));
 
     const yupSchema = controls.reduce(buildControlSchema, {});
@@ -22,8 +22,8 @@ function ControlPreviewList({ controls }) {
   }, controls);
 
   const formik = useFormik({
-    initialValues: memoizedFormConfig.initialValues,
-    validationSchema: memoizedFormConfig.validationSchema,
+    initialValues,
+    validationSchema,
     onSubmit: (values) => console.log(values),
   });
 
@@ -32,11 +32,20 @@ function ControlPreviewList({ controls }) {
     return controlData.component;
   };
 
+  const handleChange = (name, value) => {
+    formik.setFieldValue(name, value);
+  };
+
   const getControl = (control) => {
     let component = getControlComponent(control);
     return (
       <>
-        {createElement(component, { control, formik })}
+        {createElement(component, {
+          control,
+          value: formik.values[control.id],
+          onChange: handleChange,
+          onBlur: formik.handleBlur,
+        })}
         {formik.touched[control.id] && formik.errors[control.id] && (
           <Text variant="validation">{formik.errors[control.id]}</Text>
         )}

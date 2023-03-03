@@ -39,7 +39,7 @@ function BuilderNavbar({ form, formExists }) {
         <NavImageLink
           logoText={"Preview Form"}
           logo={FaRegEye}
-          link={`/${form.id}/preview`}
+          link={`/form/${form.id}/preview`}
           iconSize="25px"
         ></NavImageLink>
       </Box>
@@ -47,7 +47,7 @@ function BuilderNavbar({ form, formExists }) {
         <NavImageLink
           logoText={"Settings"}
           logo={MdSettings}
-          link={`/${form.id}/settings`}
+          link={`/form/${form.id}/settings`}
           iconSize="25px"
         ></NavImageLink>
       </Box>

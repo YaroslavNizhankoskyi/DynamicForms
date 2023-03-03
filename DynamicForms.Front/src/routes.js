@@ -95,7 +95,7 @@ export const routes = [
     ],
   },
   {
-    path: "/form",
+    path: "/form/:formId",
     name: "Form",
     component: Form,
     guard: Guards.NONE,

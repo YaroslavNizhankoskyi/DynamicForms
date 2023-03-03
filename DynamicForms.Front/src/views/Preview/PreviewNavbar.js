@@ -1,7 +1,6 @@
 import React from "react";
 import { Grid, Box, Flex, Icon } from "@chakra-ui/react";
 import GenericNavbar from "components/Navbars/GenericNavbar";
-import NavImageLink from "components/Sidebar/NavImageLink";
 import {
   FaArrowLeft,
   FaDesktop,
@@ -15,16 +14,9 @@ function PreviewNavbar({ formId, display, setDisplay }) {
   const getColor = (type) => (display == type ? selectedColor : defaultColor);
 
   return (
-    <GenericNavbar height="100px">
+    <GenericNavbar height="100px" bg={"gray.300"}>
       <Grid templateColumns="repeat(3, 1fr)" gap={6} w={"100%"}>
-        <Box>
-          <NavImageLink
-            logoText={"Builder"}
-            logo={FaArrowLeft}
-            link={`/${formId}/builder`}
-            iconSize="20px"
-          ></NavImageLink>
-        </Box>
+        <Box></Box>
         <Flex gap={2} justifyContent={"space-around"}>
           <Icon
             as={FaDesktop}

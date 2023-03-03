@@ -5,7 +5,7 @@ import { routes } from "routes.js";
 import { useParams } from "react-router-dom";
 import BuilderNavbar from "views/Builder/BuilderNavbar";
 import { useSelector } from "react-redux";
-
+import controlsData from "variables/controls";
 function Form() {
   const { formId } = useParams();
 
@@ -18,17 +18,11 @@ function Form() {
     modified: new Date(),
     status: "unsaved",
   };
-  let t = getRoutesFor(routes, `/form`);
-
   const [form, setForm] = useState(initialForm);
 
   let existingForm = useSelector((state) =>
     state.userForms.find((el) => el.id == form.id)
   );
-
-  if (existingForm) {
-    refillFormData();
-  }
 
   const refillFormData = () => {
     existingForm = structuredClone(existingForm);
@@ -49,6 +43,12 @@ function Form() {
     setForm(existingForm);
   };
 
+  useEffect(() => {
+    if (existingForm) {
+      refillFormData();
+    }
+  }, []);
+
   return (
     <>
       <BuilderNavbar
@@ -57,7 +57,7 @@ function Form() {
         formExists={existingForm && true}
       />
       <Switch>
-        {getRoutesFor(routes, `/form`, { form, setForm })}
+        {getRoutesFor(routes, `/form/${form.id}`, { form, setForm })}
         <Redirect from="/admin" to="/home" />
       </Switch>
     </>
