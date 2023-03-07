@@ -20,9 +20,9 @@ function Form() {
   };
   const [form, setForm] = useState(initialForm);
 
-  let existingForm = useSelector((state) =>
-    state.userForms.find((el) => el.id == form.id)
-  );
+  let existingForm = {
+    ...useSelector((state) => state.userForms.find((el) => el.id == form.id)),
+  };
 
   const refillFormData = () => {
     existingForm = structuredClone(existingForm);
