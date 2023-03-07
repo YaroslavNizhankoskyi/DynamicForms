@@ -3,7 +3,7 @@ import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { getControlsValues } from "common/helpers/getControlValues";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import FormControl from "./controls/FormControl";
+import FormControl from "./Controls/FormControl";
 
 function FormBuilder({ controls, setControls }) {
   const ids = controls.map((el) => el.id);

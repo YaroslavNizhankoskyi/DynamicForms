@@ -1,6 +1,6 @@
 import { Box, Divider, SimpleGrid, Text, Stack } from "@chakra-ui/react";
 import React from "react";
-import ControlIcon from "./controls/ControlIcon";
+import ControlIcon from "./Controls/ControlIcon";
 import controls from "variables/controls";
 import { Droppable, Draggable } from "@hello-pangea/dnd";
 
@@ -27,7 +27,7 @@ function Controls() {
               </Box>
               <Divider borderTop={"1px solid #a1a1a1"}></Divider>
               {controls.map((el, idx) => (
-                <Draggable draggableId={el.type} index={idx}>
+                <Draggable draggableId={el.type} index={idx} key={idx}>
                   {(provided, snapshot) => {
                     return (
                       <>

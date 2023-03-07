@@ -12,7 +12,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import ConfigList from "./ConfigsList";
-import { useFormik, validateYupSchema } from "formik";
+import { useFormik } from "formik";
 
 function ConfigDrawer({ btnRef, disclosure, control }) {
   const { isOpen, onOpen, onClose } = disclosure;
