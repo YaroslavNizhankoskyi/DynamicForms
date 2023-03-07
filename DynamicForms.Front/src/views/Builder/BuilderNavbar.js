@@ -6,7 +6,7 @@ import { FaRegEye } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import GenericNavbar from "components/Navbars/GenericNavbar";
 import { updateUserForm, addUserForms } from "common/redux/stores/userForms";
-import { MdSettings } from "react-icons/md";
+import { MdDynamicForm, MdSettings } from "react-icons/md";
 
 function BuilderNavbar({ form, formExists }) {
   let views = ["builder", "preview", "settings"];
@@ -35,6 +35,14 @@ function BuilderNavbar({ form, formExists }) {
         logo={CreativeTimLogo}
         link="/home"
       ></NavImageLink>
+      <Box onClick={handleOpenPreview}>
+        <NavImageLink
+          logoText={"Builder"}
+          logo={MdDynamicForm}
+          link={`/form/${form.id}/builder`}
+          iconSize="25px"
+        ></NavImageLink>
+      </Box>
       <Box onClick={handleOpenPreview}>
         <NavImageLink
           logoText={"Preview Form"}

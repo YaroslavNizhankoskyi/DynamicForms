@@ -31,6 +31,7 @@ const controls = [
     validation: {
       validationType: "number",
       usedValidators: ["number_max", "number_min", "isRequired"],
+      validatorsData: null,
     },
   },
   {
