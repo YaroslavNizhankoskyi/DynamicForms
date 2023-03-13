@@ -23,6 +23,21 @@ export const userForms = createSlice({
         return el;
       });
     },
+    addOrUpdateForm: (state, action) => {
+      var form = state.find((el) => el.id == action.payload.id);
+
+      if (form) {
+        return state.map((el) => {
+          if (el.id == action.payload.id) {
+            return action.payload;
+          }
+
+          return el;
+        });
+      } else {
+        state.push(action.payload);
+      }
+    },
     removeUserForm: (state, action) => {
       state.splice(
         state.findIndex((form) => form.id === form.payload),
@@ -35,6 +50,11 @@ export const userForms = createSlice({
   },
 });
 
-export const { addUserForms, resetUserForms, updateUserForm, removeUserForm } =
-  userForms.actions;
+export const {
+  addUserForms,
+  resetUserForms,
+  updateUserForm,
+  removeUserForm,
+  addOrUpdateForm,
+} = userForms.actions;
 export default userForms.reducer;
