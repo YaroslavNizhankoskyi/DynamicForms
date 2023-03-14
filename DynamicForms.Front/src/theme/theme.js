@@ -15,6 +15,7 @@ import { textInputTheme } from "./components/input";
 import { formControlTheme } from "./components/formControl";
 import { numberInputTheme } from "./components/numberInput";
 import { textStyles } from "./components/text";
+import { tabsTheme } from "./components/tabs";
 // import { mode } from "@chakra-ui/theme-tools";
 export default extendTheme(
   { breakpoints }, // Breakpoints
@@ -32,5 +33,6 @@ export default extendTheme(
   PanelContainerComponent, // Panel Container component
   textInputTheme,
   formControlTheme,
-  numberInputTheme
+  numberInputTheme,
+  tabsTheme
 );

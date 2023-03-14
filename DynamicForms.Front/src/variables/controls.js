@@ -1,8 +1,8 @@
 import { MdOutlineEmail, MdTextFields } from "react-icons/md";
 import { TbNumbers } from "react-icons/tb";
-import EmailInput from "views/Builder/Controls/EmailInput";
-import NumberInput from "views/Builder/Controls/NumberInput";
-import TextInput from "views/Builder/Controls/TextInput";
+import EmailInput from "views/Builder/formControls/EmailInput";
+import NumberInput from "views/Builder/formControls/NumberInput";
+import TextInput from "views/Builder/formControls/TextInput";
 
 const controls = [
   {

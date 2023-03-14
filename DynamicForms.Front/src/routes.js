@@ -24,6 +24,7 @@ import DynamicFormsBuilder from "views/Builder";
 import Preview from "views/Preview";
 import Forms from "views/Dashboard/Tables";
 import Form from "layouts/Form";
+import FormSettings from "views/Settings";
 
 export const routes = [
   {
@@ -110,6 +111,12 @@ export const routes = [
         path: "/form/:formId/preview",
         name: "Preview",
         component: Preview,
+        guard: Guards.NONE,
+      },
+      {
+        path: "/form/:formId/settings",
+        name: "Settings",
+        component: FormSettings,
         guard: Guards.NONE,
       },
     ],
