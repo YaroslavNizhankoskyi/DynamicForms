@@ -19,27 +19,25 @@ const settingsVariant = definePartsStyle((props) => {
   return {
     tab: {
       border: "2px solid",
-      borderColor: "transparent",
-      bg: "#41c7bf",
+      borderColor: "gray.300",
+      borderWidth: "0.5px",
+      bg: "#95e6e1",
       borderTopRadius: "lg",
-      borderBottom: "none",
       _selected: {
         bg: "#fff",
         color: "#41c7bf",
-        borderColor: "inherit",
         borderBottom: "none",
         mb: "-2px",
       },
     },
     tablist: {
-      borderBottom: "2x solid",
       borderColor: "inherit",
     },
     tabpanel: {
       border: "2px solid",
+      borderTop: "none",
       borderColor: "inherit",
       borderBottomRadius: "lg",
-      borderTopRightRadius: "lg",
     },
   };
 });
@@ -51,7 +49,7 @@ const variants = {
 const defaultProps = {
   size: "md",
   variant: "settings",
-  colorScheme: "#41c7bf",
+  colorScheme: "#95e6e1",
 };
 
 const tabsConfig = defineMultiStyleConfig({

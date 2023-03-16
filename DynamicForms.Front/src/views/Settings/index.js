@@ -11,7 +11,7 @@ import React from "react";
 import FormMainSettings from "./FormMainSettings";
 import SettingsPanel from "./SettingsPanel";
 
-function FormSettings() {
+function FormSettings({ form, setForm }) {
   return (
     <Flex justifyContent={"center"}>
       <VStack mt={"30px"} mx="100px">
@@ -25,7 +25,7 @@ function FormSettings() {
 
             <TabPanels>
               <SettingsPanel>
-                <FormMainSettings />
+                <FormMainSettings form={form} setForm={setForm} />
               </SettingsPanel>
               <SettingsPanel>
                 <Text>2</Text>

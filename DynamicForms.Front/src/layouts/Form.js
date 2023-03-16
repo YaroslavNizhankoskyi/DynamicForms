@@ -11,15 +11,19 @@ import { refillFormData } from "common/helpers/formHelpers";
 function Form() {
   const dispatch = useDispatch();
   const { formId } = useParams();
+  const userData = JSON.parse(localStorage.getItem("userData"));
 
   const initialForm = {
     id: formId,
+    creatorId: userData?.id,
     controls: [],
     name: "unset",
     domain: "unset",
     created: new Date(),
     modified: new Date(),
+    description: "",
     status: "unsaved",
+    visibility: true,
   };
 
   const [form, setForm] = useState(initialForm);

@@ -11,6 +11,8 @@ namespace Application.Calls.Forms.Create
     {
         public Visibility Visibility { get; init; }
         public string Name { get; init; }
+        public string Description { get; set; }
+        public string Domain { get; set; }        
         public List<InputDto> Inputs { get; set; }
         public List<SelectDto> Selects { get; set; }
     }
