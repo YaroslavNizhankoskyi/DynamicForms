@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import GenericNavbar from "components/Navbars/GenericNavbar";
 import { updateUserForm, addUserForms } from "common/redux/stores/userForms";
 import { MdDynamicForm, MdSettings } from "react-icons/md";
+import { getSaveableForm } from "common/helpers/formHelpers";
 
 function BuilderNavbar({ form, formExists }) {
   let views = ["builder", "preview", "settings"];
@@ -15,16 +16,12 @@ function BuilderNavbar({ form, formExists }) {
   const dispatch = useDispatch();
 
   const handleOpenPreview = () => {
-    const serializableControls = form.controls.map((el) => {
-      return { ...el, icon: undefined, component: undefined };
-    });
-
-    const formCopy = { ...form, controls: serializableControls };
+    const saveableForm = getSaveableForm(form);
 
     if (formExists) {
-      dispatch(updateUserForm(formCopy));
+      dispatch(updateUserForm(saveableForm));
     } else {
-      dispatch(addUserForms(formCopy));
+      dispatch(addUserForms(saveableForm));
     }
   };
 

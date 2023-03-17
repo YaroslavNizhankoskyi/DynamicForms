@@ -7,6 +7,7 @@ import BuilderNavbar from "views/Builder/BuilderNavbar";
 import { useDispatch, useSelector } from "react-redux";
 import { addOrUpdateForm } from "common/redux/stores/userForms";
 import { refillFormData } from "common/helpers/formHelpers";
+import { getSaveableForm } from "common/helpers/formHelpers";
 
 function Form() {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ function Form() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (activePage == "builder" || activePage == "settings") {
-        dispatch(addOrUpdateForm(structuredClone(form)));
+        dispatch(addOrUpdateForm(getSaveableForm(form)));
       }
     }, 10000);
 

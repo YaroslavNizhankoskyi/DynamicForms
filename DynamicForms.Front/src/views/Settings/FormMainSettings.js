@@ -11,6 +11,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { getFormikValues } from "common/helpers/formAccess/getFormikValues";
+import { getSaveableForm } from "common/helpers/formHelpers";
 import { updateUserForm } from "common/redux/stores/userForms";
 import { useFormik } from "formik";
 import React from "react";
@@ -34,7 +35,7 @@ function FormMainSettings({ form, setForm }) {
   });
 
   const saveDataChangesLocaly = (form) => {
-    dispatcher(updateUserForm(form));
+    dispatcher(updateUserForm(getSaveableForm(form)));
   };
 
   const saveFormToDb = (form) => {};

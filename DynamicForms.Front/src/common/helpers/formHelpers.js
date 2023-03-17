@@ -17,3 +17,15 @@ export const refillFormData = (form) => {
   clonedForm.controls = createdControls;
   return clonedForm;
 };
+
+export const getSaveableForm = (form) => {
+  const formCopy = { ...form };
+
+  const serializableControls = form.controls.map((el) => {
+    return { ...el, icon: undefined, component: undefined };
+  });
+
+  formCopy.controls = serializableControls;
+
+  return structuredClone(formCopy);
+};
