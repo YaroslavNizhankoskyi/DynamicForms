@@ -8,7 +8,6 @@ const AuthGuard = ({ guard, component: Component, ...rest }) => {
       {...rest}
       render={(props) => {
         if (isAllowed(guard)) {
-          console.log(props);
           return <Component {...props} {...rest}></Component>;
         }
 

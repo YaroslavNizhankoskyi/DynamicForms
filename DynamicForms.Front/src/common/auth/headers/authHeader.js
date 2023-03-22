@@ -9,3 +9,10 @@ export const setAuthToken = (token) => {
 export const deleteAuthToken = () => {
   delete axios.defaults.headers.common["Authorization"];
 };
+
+export const reinitializeAuthToken = () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    setAuthToken(token);
+  }
+};

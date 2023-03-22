@@ -1,7 +1,7 @@
 import axios from "axios";
 import { NotificationManager } from "react-notifications";
 
-function userAxiosGlobalErrorHandler() {
+function useAxiosGlobalErrorHandler() {
   axios.interceptors.response.use(undefined, function (error) {
     const statusCode = error.response ? error.response.status : null;
     switch (statusCode) {
@@ -22,4 +22,4 @@ function userAxiosGlobalErrorHandler() {
   });
 }
 
-export default userAxiosGlobalErrorHandler;
+export default useAxiosGlobalErrorHandler;

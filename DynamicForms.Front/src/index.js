@@ -28,11 +28,15 @@ import { addCustomYupValidators } from "common/builder/validation/addCustomYupVa
 import { store, persistor } from "common/redux/store";
 import { Provider as ReduxProvider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { reinitializeAuthToken } from "common/auth/headers/authHeader";
+import useAxiosGlobalErrorHandler from "common/auth/interceptors/errorHandlerInterceptor";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
+reinitializeAuthToken();
 addCustomYupValidators();
+useAxiosGlobalErrorHandler();
 
 root.render(
   <ReduxProvider store={store}>
