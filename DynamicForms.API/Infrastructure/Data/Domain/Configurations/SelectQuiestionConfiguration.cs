@@ -18,9 +18,6 @@ namespace Infrastructure.Data.Domain.Configurations
                 .HasForeignKey(x => x.SelectQuestionId)
                 .OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction);
 
-            builder.Property(x => x.IsMultiple)
-                .IsRequired();
-
             builder.Property(x => x.Options)
                 .IsRequired()
                 .HasMaxLength(50_000);

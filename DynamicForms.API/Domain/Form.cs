@@ -6,7 +6,7 @@
         public DateTimeOffset DateModified { get; set; }
         public string Name { get; set; }
         public Visibility Visibility { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public string Domain { get; set; }
         public Guid CreatorId { get; set; }
         public ICollection<InputQuestion> InputQuestions { get; set; }

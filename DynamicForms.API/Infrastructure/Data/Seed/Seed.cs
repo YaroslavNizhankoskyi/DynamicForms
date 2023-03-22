@@ -117,6 +117,8 @@ namespace Infrastructure.Data.Seed
                     Name = "Seed seed1.df Form1",
                     CreatorId = Guid.Parse(DUserId1),
                     DateCreated = DateTimeOffset.Now,
+                    DateModified = DateTimeOffset.Now,
+                    Domain = "seed",
                     Id = Guid.NewGuid(),
                     Visibility = Visibility.Public
                 },
@@ -125,6 +127,8 @@ namespace Infrastructure.Data.Seed
                     Name = "Seed seed1.df Form2",
                     CreatorId = Guid.Parse(DUserId1),
                     DateCreated = DateTimeOffset.Now,
+                    DateModified = DateTimeOffset.Now,
+                    Domain = "seed",
                     Id = Guid.NewGuid(),
                     Visibility = Visibility.Private
                 },
@@ -133,6 +137,8 @@ namespace Infrastructure.Data.Seed
                     Name = "Seed seed1.df Form3",
                     CreatorId = Guid.Parse(DUserId1),
                     DateCreated = DateTimeOffset.Now,
+                    DateModified = DateTimeOffset.Now,
+                    Domain = "seed",
                     Id = Guid.NewGuid(),
                     Visibility = Visibility.Public
                 },
@@ -140,6 +146,8 @@ namespace Infrastructure.Data.Seed
                 {
                     Name = "Seed seed2.df Form1",
                     CreatorId = Guid.Parse(DUserId2),
+                    DateModified = DateTimeOffset.Now,
+                    Domain = "seed",
                     DateCreated = DateTimeOffset.Now,
                     Id = Guid.NewGuid(),
                     Visibility = Visibility.Public
@@ -149,6 +157,8 @@ namespace Infrastructure.Data.Seed
                     Name = "Seed seed2.df Form1",
                     CreatorId = Guid.Parse(DUserId2),
                     DateCreated = DateTimeOffset.Now,
+                    DateModified = DateTimeOffset.Now,
+                    Domain = "seed",
                     Id = Guid.NewGuid(),
                     Visibility = Visibility.Private
                 },
@@ -157,6 +167,8 @@ namespace Infrastructure.Data.Seed
                     Name = "Seed seed2.df Form1",
                     CreatorId = Guid.Parse(DUserId2),
                     DateCreated = DateTimeOffset.Now,
+                    DateModified = DateTimeOffset.Now,
+                    Domain = "seed",
                     Id = Guid.NewGuid(),
                     Visibility = Visibility.Public
                 },
@@ -165,6 +177,8 @@ namespace Infrastructure.Data.Seed
                     Name = "Seed seed3.df Form1",
                     CreatorId = Guid.Parse(DUserId3),
                     DateCreated = DateTimeOffset.Now,
+                    DateModified = DateTimeOffset.Now,
+                    Domain = "seed",
                     Id = Guid.NewGuid(),
                     Visibility = Visibility.Public
                 },
@@ -173,6 +187,8 @@ namespace Infrastructure.Data.Seed
                     Name = "Seed seed3.df Form1",
                     CreatorId = Guid.Parse(DUserId3),
                     DateCreated = DateTimeOffset.Now,
+                    DateModified = DateTimeOffset.Now,
+                    Domain = "seed",
                     Id = Guid.NewGuid(),
                     Visibility = Visibility.Private
                 },
@@ -181,6 +197,8 @@ namespace Infrastructure.Data.Seed
                     Name = "Seed seed3.df Form1",
                     CreatorId = Guid.Parse(DUserId3),
                     DateCreated = DateTimeOffset.Now,
+                    DateModified = DateTimeOffset.Now,
+                    Domain = "seed",
                     Id = Guid.NewGuid(),
                     Visibility = Visibility.Public
                 },

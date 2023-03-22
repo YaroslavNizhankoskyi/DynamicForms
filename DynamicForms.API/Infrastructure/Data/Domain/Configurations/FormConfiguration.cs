@@ -32,6 +32,12 @@ namespace Infrastructure.Data.Domain.Configurations
                 .HasForeignKey(x => x.CreatorId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Property(x => x.Description)
+                .HasMaxLength(1000);
+
+            builder.Property(x => x.Domain)
+                .HasMaxLength(100);
+
             base.Configure(builder);
         }
     }

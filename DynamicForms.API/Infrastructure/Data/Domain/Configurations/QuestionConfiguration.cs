@@ -7,10 +7,6 @@ namespace Infrastructure.Data.Domain.Configurations
     {
         public override void Configure(EntityTypeBuilder<Question> builder)
         {
-            builder.Property(x => x.Text)
-                .IsRequired()
-                .HasMaxLength(500);
-
             builder.Property(x => x.IsRequired)
                 .IsRequired();
 
