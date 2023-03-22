@@ -10,7 +10,9 @@ import {
   Textarea,
   VStack,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { getFormikValues } from "common/helpers/formAccess/getFormikValues";
+import { getApiSavableForm } from "common/helpers/formHelpers";
 import { getSaveableForm } from "common/helpers/formHelpers";
 import { updateUserForm } from "common/redux/stores/userForms";
 import { useFormik } from "formik";
@@ -38,7 +40,14 @@ function FormMainSettings({ form, setForm }) {
     dispatcher(updateUserForm(getSaveableForm(form)));
   };
 
-  const saveFormToDb = (form) => {};
+  const saveDataChangesToAPI = (form) => {
+    let readyToSaveForm = getApiSavableForm(form);
+    let url = process.env.REACT_APP_APIUrl + "/forms";
+
+    axios.post(url, readyToSaveForm).then((response) => {
+      console.log(response);
+    });
+  };
 
   const formik = useFormik({
     initialValues: getFormikValues(form, formMainProperties),
@@ -48,7 +57,10 @@ function FormMainSettings({ form, setForm }) {
         form[propName] = values[propName];
       });
 
+      console.log(form);
+
       saveDataChangesLocaly(form);
+      saveDataChangesToAPI(form);
     },
   });
 
