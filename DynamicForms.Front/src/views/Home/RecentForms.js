@@ -15,6 +15,7 @@ function RecentForms() {
       })
       .slice(0, 3);
   });
+  console.log(forms);
 
   return (
     <FormsTable
@@ -28,7 +29,7 @@ function RecentForms() {
             name={form.name}
             logo={MdDynamicForm}
             status={form.status}
-            modified={formatIsoDate(form.modified)}
+            modified={formatIsoDate(form.dateModified)}
             id={form.id}
             key={form.id}
           />
