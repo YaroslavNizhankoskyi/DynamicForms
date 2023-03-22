@@ -9,10 +9,13 @@ namespace Application.Calls.Forms.Create
 {
     public record CreateFormCommand : IRequest<Guid>
     {
-        public Visibility Visibility { get; init; }
+        public Guid Id { get; set; }
+        public bool Visibility { get; init; }
         public string Name { get; init; }
         public string Description { get; set; }
-        public string Domain { get; set; }        
+        public string Domain { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
+        public DateTimeOffset DateModified { get; set; }
         public List<InputDto> Inputs { get; set; }
         public List<SelectDto> Selects { get; set; }
     }
@@ -42,7 +45,7 @@ namespace Application.Calls.Forms.Create
             form.CreatorId = user.DomainId;
             _dbContext.Forms.Add(form);
 
-            if ((await _dbContext.SaveChangesAsync(cancellationToken)) != 0)
+            if ((await _dbContext.SaveChangesAsync(cancellationToken)) > 0)
             {
                 var inputs = _mapper.Map<List<InputQuestion>>(request.Inputs)
                     .Select(x =>
@@ -60,7 +63,7 @@ namespace Application.Calls.Forms.Create
                 _dbContext.InputQuestions.AddRange(inputs);
                 _dbContext.SelectQuestions.AddRange(selects);
 
-                if ((await _dbContext.SaveChangesAsync(cancellationToken)) == 0)
+                if ((await _dbContext.SaveChangesAsync(cancellationToken)) > 0)
                 {
                     return form.Id;
                 }

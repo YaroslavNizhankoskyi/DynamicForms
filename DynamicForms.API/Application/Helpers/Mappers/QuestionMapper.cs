@@ -9,20 +9,15 @@ namespace Application.Helpers.Mappers
         public QuestionMapper()
         {
             CreateMap<InputDto, InputQuestion>()
-                .ForMember(m => m.Type,
-                    src => src.MapFrom(s => MapInputType(s.Type)));
+                .ForMember(m => m.InputType,
+                    src => src.MapFrom(s => s.Type.ToEnum<InputType>()));
 
             CreateMap<SelectDto, SelectQuestion>()
                 .ForMember(m => m.Options,
                     src => src.MapFrom(s => s.Options.Aggregate(
-                        (a, b) => a + ";" + b)));
-        }
-
-        public static InputType MapInputType(string value)
-        {
-            var inputType = value.Replace("Input", "");
-
-            return inputType.ToEnum<InputType>(); ;
+                        (a, b) => a + ";" + b)))
+                .ForMember(m => m.SelectType,
+                    src => src.MapFrom(s => s.Type.ToEnum<SelectType>()));
         }
     }
 }

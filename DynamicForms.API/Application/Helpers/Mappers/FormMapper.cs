@@ -9,10 +9,11 @@ namespace Application.Helpers.Mappers
         public FormMapper()
         {
             CreateMap<CreateFormCommand, Form>()
+                .ForMember(x => x.Visibility, src => src.MapFrom(x => x.Visibility 
+                    ? Visibility.Public 
+                    : Visibility.Private))
                 .ForMember(x => x.InputQuestions, src => src.Ignore())
-                .ForMember(x => x.SelectQuestions, src => src.Ignore())
-                .ForMember(x => x.DateCreated, src => src.MapFrom(
-                    s => DateTimeOffset.Now));
+                .ForMember(x => x.SelectQuestions, src => src.Ignore());
         }
     }
 }
